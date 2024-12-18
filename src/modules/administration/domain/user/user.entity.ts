@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Role } from '../rol/rol.entity';
 
 @Entity({
   name: 'Users',
@@ -42,4 +44,8 @@ export class User {
   @UpdateDateColumn()
   @AutoMap()
   updated_at: Date;
+
+  @ManyToOne(() => Role, (role) => role.users)
+  @AutoMap()
+  role: Role;
 }
