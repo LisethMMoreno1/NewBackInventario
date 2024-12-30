@@ -1,8 +1,10 @@
 import { AutoMap } from '@automapper/classes';
+import { Payment } from 'src/modules/administration/domain/payment/payment.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -35,7 +37,7 @@ export class Bank {
   @AutoMap()
   updated_at: Date;
 
-  /*   @OneToMany(() => Payment, (payment) => payment.bank)
+  @OneToMany(() => Payment, (payment) => payment.bank)
   @AutoMap()
-  payments: Payment[]; */
+  payments: Payment[];
 }

@@ -1,15 +1,16 @@
-/* import { User } from 'src/modules/administration/domain/user/user.entity';
- */
 import { AutoMap } from '@automapper/classes';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Customers } from 'src/modules/administration/domain/customers/customers.entity';
+import { User } from 'src/modules/administration/domain/user/user.entity';
 
-@Entity({ schema: 'Mantenimiento', name: 'TypeOfIdentification' })
+@Entity({ schema: 'Mantenimiento', name: 'typeOfIdentification' })
 export class TypeOfIdentification {
   @PrimaryGeneratedColumn()
   @AutoMap()
@@ -21,9 +22,9 @@ export class TypeOfIdentification {
 
   @Column()
   @AutoMap()
-  code_typeIdentification: number;
+  code_typeIdentification: string;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: 'boolean', default: true })
   @AutoMap()
   state: boolean;
 
@@ -35,9 +36,9 @@ export class TypeOfIdentification {
   @AutoMap()
   updated_at: Date;
 
-  /*  @OneToMany(() => User, (user) => user.typeOfIdentification)
-  users: User[]; */
+  @OneToMany(() => User, (user) => user.typeOfIdentification)
+  users: User[];
 
-  /* @OneToMany(() => Customers, (customers) => customers.typeOfIdentification)
-  customers: Customers[]; */
+  @OneToMany(() => Customers, (customers) => customers.typeOfIdentification)
+  customers: Customers[];
 }

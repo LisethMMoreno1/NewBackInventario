@@ -9,7 +9,7 @@ import {
 import { AutoMap } from '@automapper/classes';
 import { City } from '../cities/cities.entity';
 
-@Entity({ schema: 'Mantenimiento', name: 'Departments' })
+@Entity({ schema: 'Mantenimiento', name: 'departments' })
 export class Department {
   @PrimaryGeneratedColumn()
   @AutoMap()

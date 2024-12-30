@@ -1,22 +1,15 @@
-import { AutoMap } from '@automapper/classes';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class TypeOfIdentificationRequestDto {
-  /**
-   *name_typeIdentification
-   */
   @IsString()
   @IsNotEmpty({
-    message: 'El Nombre del  tipo de identificacion es obligatorio.',
+    message: 'El Nombre del tipo de identificación es obligatorio.',
   })
   name_typeIdentification: string;
 
-  /**
-   * code_typeIdentification
-   */
-  @IsNumber()
-  @IsNotEmpty()
-  @IsNumber()
-  @AutoMap()
-  code_typeIdentification: number;
+  @IsString()
+  @IsNotEmpty({
+    message: 'El Código del tipo de identificación es obligatorio.',
+  })
+  code_typeIdentification: string;
 }

@@ -1,63 +1,54 @@
 import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { TypeOfIdentificationRequestDto } from 'src/modules/maintenance/domain/type-of-identification/DTO/typeIdentification-request.dto';
 import { TypeOfIdentificationResponseDto } from 'src/modules/maintenance/domain/type-of-identification/DTO/typeIdentification-response.dto';
 import { TypeOfIdentification } from 'src/modules/maintenance/domain/type-of-identification/typeidentification.entity';
 import { TypeOfIdentificationRepository } from 'src/modules/maintenance/infrastruture/persistence/repositories/typeIdentification.repository';
 
 /**
- * Service class for creating a new bank.
+ * Service class for creating a new type of identification.
  */
 @Injectable()
 export class CreateTypeIdentificationService {
-  /**
-   * Creates an instance of the CreatebankService class.
-   * @param _mapper - The mapper used for mapping objects.
-   * @param _typeOfIdentificationRepository - The repository for managing bank entities.
-   */
   constructor(
     @InjectMapper() private readonly _mapper: Mapper,
     private readonly _typeOfIdentificationRepository: TypeOfIdentificationRepository,
   ) {}
 
   /**
-   * Handle the creation of a new bank
-   * Creates a new bank.
-   * @param typeOfIdentification - The bank to be created.
-   * @returns The created bank.
+   * Handle the creation of a new type of identification.
+   * @param createDto - The type of identification to be created.
+   * @returns The created type of identification.
    */
   async handle(
-    typeOfIdentificationRequest: TypeOfIdentificationRequestDto,
+    createDto: TypeOfIdentificationRequestDto,
   ): Promise<TypeOfIdentificationResponseDto> {
-    const typeOfIdentificationMap = this._mapper.map(
-      typeOfIdentificationRequest,
-      TypeOfIdentificationRequestDto,
-      TypeOfIdentification,
-    );
+    // Crear una nueva entidad
+    const typeOfIdentification = new TypeOfIdentification();
 
-    const existbank = await this._typeOfIdentificationRepository.getOne({
-      where: [
-        {
-          id_typeIdentification: typeOfIdentificationMap?.id_typeIdentification,
-        },
-      ],
-    });
+    // Asignar los valores del DTO a la entidad
+    typeOfIdentification.name_typeIdentification =
+      createDto.name_typeIdentification;
+    typeOfIdentification.code_typeIdentification =
+      createDto.code_typeIdentification;
 
-    if (existbank?.name_typeIdentification)
-      throw new ConflictException('Ya existe un banco con ese nombre');
+    // Verifica si 'name_typeIdentification' tiene un valor antes de insertarlo
+    if (!typeOfIdentification.name_typeIdentification) {
+      throw new Error('El nombre del tipo de identificación es obligatorio');
+    }
 
-    const typeOfIdentification =
-      await this._typeOfIdentificationRepository.create(
-        typeOfIdentificationMap,
-      );
+    // Guardar la entidad en la base de datos
+    const createdTypeOfIdentification =
+      await this._typeOfIdentificationRepository.save(typeOfIdentification);
 
-    const response = this._mapper.map(
-      typeOfIdentification,
+    // Mapear la respuesta a un DTO
+    const responseDto = this._mapper.map(
+      createdTypeOfIdentification,
       TypeOfIdentification,
       TypeOfIdentificationResponseDto,
     );
 
-    return response;
+    return responseDto;
   }
 }

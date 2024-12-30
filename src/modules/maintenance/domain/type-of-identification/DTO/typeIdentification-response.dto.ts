@@ -8,7 +8,7 @@ export class TypeOfIdentificationResponseDto {
   name_typeIdentification: string;
 
   @AutoMap()
-  code_typeIdentification: number;
+  code_typeIdentification: string;
 
   @AutoMap()
   state: boolean;

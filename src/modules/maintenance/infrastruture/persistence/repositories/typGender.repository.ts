@@ -156,4 +156,23 @@ export class TypeOfGenderRepository {
       );
     }
   }
+
+  /**
+   * Retrieves a TypeOfGender by its ID from the database.
+   * @param id_typeOfGender - The ID of the TypeOfGender to retrieve.
+   * @returns A promise that resolves to the found TypeOfGender.
+   * @throws HttpException if there's an error retrieving the TypeOfGender.
+   */
+  async getById(id_typeOfGender: number): Promise<TypeOfGender> {
+    try {
+      return await this._context.typeOfGender.getOne({
+        where: { id_typeOfGender },
+      });
+    } catch (error) {
+      throw new HttpException(
+        `Error de DB: ${error?.message}`,
+        error?.status || 500,
+      );
+    }
+  }
 }

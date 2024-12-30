@@ -5,35 +5,24 @@ import { TypeOfIdentificationResponseDto } from 'src/modules/maintenance/domain/
 import { TypeOfIdentification } from 'src/modules/maintenance/domain/type-of-identification/typeidentification.entity';
 import { TypeOfIdentificationRepository } from 'src/modules/maintenance/infrastruture/persistence/repositories/typeIdentification.repository';
 
-/**
- * Service class for deleting a bank.
- */
 @Injectable()
 export class GetAllTypeIdentificationService {
-  /**
-   * Constructor for GetAllTypeIdentificationService.
-   * @param _mapper - The mapper used for mapping objects.
-   * @param _typeOfIdentificationRepository - The repository for managing bank entities.
-   */
   constructor(
-    @InjectMapper() private readonly _mapper: Mapper,
+    @InjectMapper() private readonly _mapper: Mapper, // Inyectamos el Mapper
     private readonly _typeOfIdentificationRepository: TypeOfIdentificationRepository,
   ) {}
 
-  /**
-   * Deletes a bank by its ID.
-   * @param id_typeIdentification - The ID of the bank to delete.
-   * @throws NotFoundException if the bank is not found.
-   */
+  // Método para obtener todos los registros
   async getAll(): Promise<TypeOfIdentificationResponseDto[]> {
-    const typeOfIdentification =
+    const typeOfIdentifications =
       await this._typeOfIdentificationRepository.getAll();
 
-    return typeOfIdentification.map((typeOfIdentification) =>
+    // Realizamos el mapeo de la entidad a DTO sin necesidad de un servicio adicional
+    return typeOfIdentifications.map((typeOfIdentification) =>
       this._mapper.map(
         typeOfIdentification,
         TypeOfIdentification,
-        TypeOfIdentification,
+        TypeOfIdentificationResponseDto,
       ),
     );
   }

@@ -32,7 +32,7 @@ export class DepartmentsController {
     private readonly _getCitiesByCodeService: GetCitiesByCodeService,
   ) {}
 
-  @Post()
+  @Post('create')
   async create(
     @Body() departmentRequestDto: DepartmentRequestDto,
   ): Promise<DepartmentResponseDto> {

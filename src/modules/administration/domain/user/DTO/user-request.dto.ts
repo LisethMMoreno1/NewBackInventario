@@ -1,35 +1,61 @@
 import { AutoMap } from '@automapper/classes';
-import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
+import { TypeOfGender } from 'src/modules/maintenance/domain/type-of-gender/typeGender.entity';
+import { TypeOfIdentification } from 'src/modules/maintenance/domain/type-of-identification/typeidentification.entity';
+import { Role } from '../../rol/rol.entity';
+import { RoleModule } from '../../roleModule/roleModule.entity';
 
-/**
- * A class representing a user request dto.
- */
 export class UserRequestDto {
-  /**
-   * User request name
-   */
+  @IsNotEmpty()
+  @AutoMap()
+  identificationNumber: number;
+
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty({ message: 'Campo requerido.' })
   @AutoMap()
   name: string;
 
-  /**
-   * User request identificationNumber
-   */
-  @IsString()
-  @IsNotEmpty({ message: 'Campo requerido' })
-  @AutoMap()
-  @Length(6, 15, {
-    message:
-      'Campo debe tener por lo menos 6 dígitos y que no sobrepase de los 15.',
-  })
-  identificationNumber: string;
-
-  /**
-   * User request email
-   */
-  @IsEmail({}, { message: 'Ingresa un correo valido.' })
-  @IsNotEmpty({ message: 'Campo requerido' })
+  @IsNotEmpty()
+  @IsEmail()
+  @Length(1, 50)
   @AutoMap()
   email: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(8, 250)
+  @AutoMap()
+  password: string;
+
+  @IsNotEmpty()
+  @AutoMap()
+  typeOfGender: TypeOfGender;
+
+  @IsNotEmpty()
+  @AutoMap()
+  typeOfIdentification: TypeOfIdentification;
+
+  @IsBoolean()
+  @AutoMap()
+  state: boolean;
+
+  @IsOptional()
+  @IsString()
+  @AutoMap()
+  accessToken: string;
+
+  @IsNotEmpty()
+  @AutoMap()
+  role: Role;
+
+  @IsOptional()
+  @AutoMap()
+  roleModule: RoleModule;
 }

@@ -160,4 +160,24 @@ export class TypeOfIdentificationRepository {
       );
     }
   }
+  /**
+   * Encuentra un tipo de identificación por su ID.
+   * @param id_typeIdentification - El ID del tipo de identificación a buscar.
+   * @returns El tipo de identificación encontrado o null si no existe.
+   * @throws HttpException si hay un error en la base de datos.
+   */
+  async getById(
+    id_typeIdentification: number,
+  ): Promise<TypeOfIdentification | null> {
+    try {
+      return await this._context.typeOfIdentification.getOne({
+        where: { id_typeIdentification },
+      });
+    } catch (error) {
+      throw new HttpException(
+        `Error al obtener el tipo de identificación: ${error?.message}`,
+        error?.status || 500,
+      );
+    }
+  }
 }

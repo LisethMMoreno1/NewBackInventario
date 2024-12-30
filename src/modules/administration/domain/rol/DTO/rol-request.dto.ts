@@ -15,16 +15,16 @@ export class RoleRequestDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(50)
-  name_rol: string; // Role name (e.g., Administrator, User, etc.)
+  name_rol: string;
 
   @AutoMap()
   @IsOptional()
   @IsString()
   @MaxLength(255)
-  description?: string; // Optional role description
+  description?: string;
 
   @AutoMap()
   @IsOptional()
   @IsBoolean()
-  state?: boolean; // Active or inactive state
+  state?: boolean;
 }

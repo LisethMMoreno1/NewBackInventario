@@ -136,4 +136,10 @@ export class UserRepository {
       );
     }
   }
+
+  async getByIdentificationNumber(
+    identificationNumber: number,
+  ): Promise<User | null> {
+    return this.getOne({ where: { identificationNumber } });
+  }
 }

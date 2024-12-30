@@ -34,7 +34,7 @@ export class RoleController {
    * @param roleRequest
    * @returns The created Role
    */
-  @Post('create')
+  @Post()
   async createRole(
     @Body() roleRequest: RoleResponseDto,
   ): Promise<RoleResponseDto> {

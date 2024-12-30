@@ -34,7 +34,7 @@ export class TypeOfGenderController {
    * Create a new TypeOfGender
    * @param typeOfGenderRequest
    */
-  @Post('create')
+  @Post()
   async createTypeOfGender(
     @Body() typeOfGenderRequest: TypeOfGenderRequestDto,
   ): Promise<TypeOfGenderResponseDto> {

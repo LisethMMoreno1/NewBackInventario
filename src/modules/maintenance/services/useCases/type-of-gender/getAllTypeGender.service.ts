@@ -20,13 +20,10 @@ export class GetAllTypeGenderService {
     private readonly _typeOfGenderRepository: TypeOfGenderRepository,
   ) {}
 
-  /**
-   * Gets all gender types.
-   * @throws NotFoundException if no gender types are found.
-   */
   async getAll(): Promise<TypeOfGenderResponseDto[]> {
     const typeOfGender = await this._typeOfGenderRepository.getAll();
 
+    // Asegúrate de crear el mapeo directamente aquí
     return typeOfGender.map((typeOfGender) =>
       this._mapper.map(typeOfGender, TypeOfGender, TypeOfGenderResponseDto),
     );

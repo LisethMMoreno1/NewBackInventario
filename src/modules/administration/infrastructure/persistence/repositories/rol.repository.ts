@@ -1,6 +1,5 @@
 import { HttpException, Injectable, Scope } from '@nestjs/common';
-
-import { AdministrationContext } from '../context/administrationContext.service';
+import { Role } from 'src/modules/administration/domain/rol/rol.entity';
 import {
   DeleteCriteriaType,
   GetAllCriteriaType,
@@ -8,7 +7,7 @@ import {
   SaveOptionsType,
   UpdateCriteriaType,
 } from 'src/modules/database/types';
-import { Role } from 'src/modules/administration/domain/rol/rol.entity';
+import { AdministrationContext } from '../context/administrationContext.service';
 
 /**
  * Represents a Role repository.
@@ -135,5 +134,14 @@ export class RolRepository {
         error?.status || 500,
       );
     }
+  }
+
+  /**
+   * Method to get a Role by ID
+   * @param id_rol - The ID of the Role.
+   * @returns A promise that resolves to the Role or null if not found.
+   */
+  async getRoleById(id_rol: number): Promise<Role | null> {
+    return this.getOne({ where: { id_rol } });
   }
 }

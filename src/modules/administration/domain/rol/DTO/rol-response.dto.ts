@@ -1,24 +1,17 @@
 import { AutoMap } from '@automapper/classes';
+import { IsString, IsBoolean, IsOptional } from 'class-validator';
 
-/**
- * DTO for returning Role data.
- */
 export class RoleResponseDto {
+  @IsString()
   @AutoMap()
-  id_rol: number; // Role ID
+  name_rol: string;
 
+  @IsString()
   @AutoMap()
-  name_rol: string; // Role name
+  description: string;
 
+  @IsBoolean()
+  @IsOptional()
   @AutoMap()
-  description: string; // Role description
-
-  @AutoMap()
-  state: boolean; // Active or inactive state
-
-  @AutoMap()
-  created_at: Date; // Role creation timestamp
-
-  @AutoMap()
-  updated_at: Date; // Role last update timestamp
+  state: boolean;
 }

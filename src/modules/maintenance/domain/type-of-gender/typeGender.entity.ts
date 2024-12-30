@@ -1,15 +1,17 @@
 /* import { User } from 'src/modules/administration/domain/user/user.entity';
  */
 import { AutoMap } from '@automapper/classes';
+import { User } from 'src/modules/administration/domain/user/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'Mantenimiento', name: 'TypeOfGender' })
+@Entity({ schema: 'Mantenimiento', name: 'typeOfGender' })
 export class TypeOfGender {
   @PrimaryGeneratedColumn()
   @AutoMap()
@@ -22,6 +24,9 @@ export class TypeOfGender {
   @Column({ type: 'boolean', default: false })
   @AutoMap()
   state: boolean;
+
+  @OneToMany(() => User, (user) => user.typeOfGender)
+  users: User[];
 
   @CreateDateColumn()
   @AutoMap()

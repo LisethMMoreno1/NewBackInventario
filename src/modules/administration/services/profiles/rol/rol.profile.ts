@@ -9,7 +9,7 @@ import { Role } from 'src/modules/administration/domain/rol/rol.entity';
  * User profile
  */
 @Injectable()
-export class RolProfile extends AutomapperProfile {
+export class RoleProfile extends AutomapperProfile {
   constructor(@InjectMapper() mapper: Mapper) {
     super(mapper);
   }

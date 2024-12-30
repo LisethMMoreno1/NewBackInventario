@@ -1,15 +1,17 @@
+import { AutoMap } from '@automapper/classes';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { AutoMap } from '@automapper/classes';
+import { RoleModule } from '../roleModule/roleModule.entity';
+import { RoleOption } from '../roleOption/roleOption.entity';
 import { User } from '../user/user.entity';
 
-@Entity({ schema: 'Mantenimiento', name: 'Role' })
+@Entity({ name: 'Role' })
 export class Role {
   @PrimaryGeneratedColumn()
   @AutoMap()
@@ -17,7 +19,7 @@ export class Role {
 
   @Column()
   @AutoMap()
-  name_rol: string; // Administrador, empleado, usuario, etc.
+  name_rol: string;
 
   @Column()
   @AutoMap()
@@ -26,6 +28,14 @@ export class Role {
   @OneToMany(() => User, (user) => user.role)
   @AutoMap()
   users: User[];
+
+  @OneToMany(() => RoleModule, (roleModule) => roleModule.role)
+  @AutoMap()
+  roleModules: RoleModule[];
+
+  @OneToMany(() => RoleOption, (roleOption) => roleOption.role)
+  @AutoMap()
+  roleOptions: RoleOption[];
 
   @Column({ type: 'boolean', default: false })
   @AutoMap()

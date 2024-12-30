@@ -7,11 +7,6 @@ import { RolRepository } from 'src/modules/administration/infrastructure/persist
 
 @Injectable()
 export class CreateRoleService {
-  /**
-   * Creates an instance of the CreateUserService class.
-   * @param _mapper - The mapper used for mapping objects.
-   * @param _userRepository - The repository for managing User entities.
-   */
   constructor(
     @InjectMapper() private readonly _mapper: Mapper,
     private readonly _rolRepository: RolRepository,
@@ -19,6 +14,6 @@ export class CreateRoleService {
 
   async handle(roleRequest: RoleRequestDto): Promise<Role> {
     const role = this._mapper.map(roleRequest, RoleRequestDto, Role);
-    return await this._rolRepository.create(role);
+    return await this._rolRepository.save(role);
   }
 }

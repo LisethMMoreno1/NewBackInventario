@@ -34,7 +34,7 @@ export class TypeOfIdentificationController {
    * Create a new TypeOfIdentification
    * @param typeOfIdentificationRequest
    */
-  @Post('create')
+  @Post()
   async createTypeOfIdentification(
     @Body() typeOfIdentificationRequest: TypeOfIdentificationRequestDto,
   ): Promise<TypeOfIdentificationResponseDto> {
