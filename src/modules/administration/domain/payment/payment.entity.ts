@@ -9,7 +9,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Order } from '../orders/orders.entity';
-import { Customers } from '../customers/customers.entity';
 import { Bank } from 'src/modules/maintenance/domain/bank/bank.entity';
 
 @Entity('payment')
@@ -47,11 +46,11 @@ export class Payment {
   @AutoMap()
   order: Order;
 
-  @ManyToOne(() => Customers, (customer) => customer.payments, {
+  /*   @ManyToOne(() => Customers, (customer) => customer.payments, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'id_customer' })
-  customer: Customers;
+  customer: Customers; */
 
   @ManyToOne(() => Bank, (bank) => bank.payments, { nullable: false })
   @JoinColumn({ name: 'id_bank' })

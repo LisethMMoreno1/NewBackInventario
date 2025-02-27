@@ -5,15 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Payment } from '../payment/payment.entity';
-import { OrderStatus } from '../orderStatus/orderStatus.entity';
 import { OrderDetails } from '../orderDetails/orderDetails.entity';
-import { Customers } from '../customers/customers.entity';
+import { OrderStatus } from '../orderStatus/orderStatus.entity';
+import { Payment } from '../payment/payment.entity';
 
 @Entity('orders')
 export class Order {
@@ -29,11 +28,11 @@ export class Order {
   @AutoMap()
   date_entry: Date;
 
-  @ManyToOne(() => Customers, (customer) => customer.orders, {
+  /*   @ManyToOne(() => Customers, (customer) => customer.orders, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'id_customers' })
-  customer: Customers;
+  customer: Customers; */
 
   @OneToOne(() => OrderDetails, { nullable: true })
   @JoinColumn()
@@ -54,6 +53,9 @@ export class Order {
   @Column({ type: 'boolean', default: true })
   @AutoMap()
   state: boolean;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  entryDate: Date;
 
   @CreateDateColumn()
   @AutoMap()

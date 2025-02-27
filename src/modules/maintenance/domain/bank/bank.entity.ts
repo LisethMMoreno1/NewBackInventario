@@ -11,7 +11,7 @@ import {
 /* import { Payment } from '../payments/payments.entity';
  *//* import { Payment } from '../../../Payment/entities/payment.entity';
  */
-@Entity({ schema: 'Mantenimiento', name: 'banks' })
+@Entity({ name: 'Banks' })
 export class Bank {
   @AutoMap()
   @PrimaryGeneratedColumn()

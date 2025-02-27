@@ -45,7 +45,7 @@ export class User {
   @JoinColumn({ name: 'id_typeIdentification' })
   typeOfIdentification: TypeOfIdentification;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: 'boolean', default: true })
   @AutoMap()
   state: boolean;
 

@@ -7,10 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Customers } from 'src/modules/administration/domain/customers/customers.entity';
 import { User } from 'src/modules/administration/domain/user/user.entity';
 
-@Entity({ schema: 'Mantenimiento', name: 'typeOfIdentification' })
+@Entity({ name: 'TypeOfIdentification' })
 export class TypeOfIdentification {
   @PrimaryGeneratedColumn()
   @AutoMap()
@@ -39,6 +38,6 @@ export class TypeOfIdentification {
   @OneToMany(() => User, (user) => user.typeOfIdentification)
   users: User[];
 
-  @OneToMany(() => Customers, (customers) => customers.typeOfIdentification)
-  customers: Customers[];
+  /* @OneToMany(() => Customers, (customers) => customers.typeOfIdentification)
+  customers: Customers[]; */
 }

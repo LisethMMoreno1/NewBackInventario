@@ -1,7 +1,6 @@
 import { AutoMap } from '@automapper/classes';
-import { Order } from '../../orders/orders.entity';
-import { Customers } from '../../customers/customers.entity';
 import { Bank } from 'src/modules/maintenance/domain/bank/bank.entity';
+import { Order } from '../../orders/orders.entity';
 
 export class PaymentResponseDto {
   @AutoMap()
@@ -28,8 +27,8 @@ export class PaymentResponseDto {
   @AutoMap()
   order: Order;
 
-  @AutoMap()
-  customer: Customers;
+  /*   @AutoMap()
+  customer: Customers; */
 
   @AutoMap()
   bank: Bank;

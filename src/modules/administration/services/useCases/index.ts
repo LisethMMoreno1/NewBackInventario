@@ -1,5 +1,4 @@
 /* istanbul ignore file */
-import { CustomersProfile } from '../profiles/customers/customers.profile';
 import { ModuleProfile } from '../profiles/module/module.profile';
 import { OptionProfile } from '../profiles/option/option.profile';
 import { OrderDetailsProfile } from '../profiles/orderDetails/orderDetails.profile';
@@ -38,7 +37,7 @@ export const AdministrationServices = [
 export const AdministrationProfiles = [
   UserProfile,
   RoleProfile,
-  CustomersProfile,
+
   OrderDetailsProfile,
   OrdersProfile,
   orderStatusProfile,

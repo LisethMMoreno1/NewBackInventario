@@ -12,7 +12,7 @@ import { envs } from 'src/config/envs';
       name: 'main',
       type: 'postgres',
       url: envs.DATABASE_URL,
-      entities: ['dist/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       logging: true,
       synchronize: process.env.NODE_ENV === 'production' ? false : true,
     }),

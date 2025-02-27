@@ -38,13 +38,13 @@ export class UserRequestDto {
   @AutoMap()
   typeOfGender: TypeOfGender;
 
-  @IsNotEmpty()
   @AutoMap()
+  @IsNotEmpty()
   typeOfIdentification: TypeOfIdentification;
 
   @IsBoolean()
-  @AutoMap()
-  state: boolean;
+  @IsOptional() // Si no es obligatorio
+  state?: boolean;
 
   @IsOptional()
   @IsString()

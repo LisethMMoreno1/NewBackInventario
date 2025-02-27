@@ -2,7 +2,6 @@ import { AutoMap } from '@automapper/classes';
 import { OrderDetails } from '../../orderDetails/orderDetails.entity';
 import { OrderStatus } from '../../orderStatus/orderStatus.entity';
 import { Payment } from '../../payment/payment.entity';
-import { Customers } from '../../customers/customers.entity';
 
 export class OrderResponseDto {
   @AutoMap()
@@ -14,9 +13,9 @@ export class OrderResponseDto {
   @AutoMap()
   date_entry: Date;
 
-  @AutoMap()
+  /*   @AutoMap()
   customer: Customers;
-
+ */
   @AutoMap()
   orderDetails: OrderDetails;
 

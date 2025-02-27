@@ -20,7 +20,7 @@ export class UserResponseDto {
   typeOfGender: string;
 
   @AutoMap()
-  typeOfIdentification: string;
+  typeOfIdentification: number;
 
   @AutoMap()
   state: boolean;

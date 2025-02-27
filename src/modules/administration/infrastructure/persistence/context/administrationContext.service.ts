@@ -1,9 +1,7 @@
 /* istanbul ignore file */
-
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { Request } from 'express';
-import { Customers } from 'src/modules/administration/domain/customers/customers.entity';
 import { Module } from 'src/modules/administration/domain/module/module.entity';
 import { Option } from 'src/modules/administration/domain/option/option.entity';
 import { OrderDetails } from 'src/modules/administration/domain/orderDetails/orderDetails.entity';
@@ -57,7 +55,6 @@ export class AdministrationContext {
   /**
    * Repository for the 'Customers' entity.
    */
-  customers: AbstractRepository<Customers>;
 
   /**
    * Repository for the 'Option' entity.
@@ -123,11 +120,7 @@ export class AdministrationContext {
       this.dataSource,
       this.request,
     );
-    this.customers = new GenericRepository<Customers>(
-      Customers,
-      this.dataSource,
-      this.request,
-    );
+
     this.option = new GenericRepository<Option>(
       Option,
       this.dataSource,

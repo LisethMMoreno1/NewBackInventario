@@ -13,7 +13,7 @@ export class GetAllUserService {
 
   async handle(): Promise<User[]> {
     return await this._userRepository.getAll({
-      relations: ['role', 'typeOfIdentification', 'genre'],
+      relations: ['role', 'typeOfIdentification', 'typeOfGender'],
     });
   }
 }

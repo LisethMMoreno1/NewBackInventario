@@ -3,7 +3,6 @@ import { MaintenanceContext } from 'src/modules/maintenance/infrastruture/persis
 import { TypeOfIdentificationRepository } from 'src/modules/maintenance/infrastruture/persistence/repositories/typeIdentification.repository';
 import { TypeOfGenderRepository } from 'src/modules/maintenance/infrastruture/persistence/repositories/typGender.repository';
 import { AdministrationContext } from './persistence/context/administrationContext.service';
-import { CustumersRepository } from './persistence/repositories/custumers.repository';
 import { ModuleRepository } from './persistence/repositories/module.repository';
 import { OptionRepository } from './persistence/repositories/option.repository';
 import { OrderDetailsRepository } from './persistence/repositories/orderDetails.repository';
@@ -22,7 +21,6 @@ export const AdministrationPersistenceProvider = [
   AdministrationContext,
   UserRepository,
   RolRepository,
-  CustumersRepository,
   OrderDetailsRepository,
   OrderRepository,
   OrderStatusRepository,

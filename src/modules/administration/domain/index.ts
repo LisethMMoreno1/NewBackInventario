@@ -1,5 +1,4 @@
 /* istanbul ignore file */
-import { Customers } from './customers/customers.entity';
 import { Module } from './module/module.entity';
 import { Option } from './option/option.entity';
 import { OrderDetails } from './orderDetails/orderDetails.entity';
@@ -16,7 +15,6 @@ export const administrationEntities = [
   User,
   Role,
   Order,
-  Customers,
   Payment,
   OrderStatus,
   OrderDetails,

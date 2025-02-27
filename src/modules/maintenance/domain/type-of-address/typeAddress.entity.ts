@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'Mantenimiento', name: 'typeOfAddress' })
+@Entity({ name: 'TypeOfAddress' })
 export class TypeOfAddress {
   @PrimaryGeneratedColumn()
   @AutoMap()
