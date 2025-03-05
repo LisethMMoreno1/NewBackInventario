@@ -1,15 +1,15 @@
 import { createMap, type Mapper } from '@automapper/core';
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
-import { Bank } from 'src/modules/maintenance/domain/bank/bank.entity';
-import { BankRequestDto } from 'src/modules/maintenance/domain/bank/DTO/bank-request.dto';
-import { BankResponseDto } from 'src/modules/maintenance/domain/bank/DTO/bank-response.dto';
+import { Department } from 'src/modules/maintenance/domain/department/department.entity';
+import { DepartmentRequestDto } from 'src/modules/maintenance/domain/department/DTO/department-request.dto';
+import { DepartmentResponseDto } from 'src/modules/maintenance/domain/department/DTO/department-response.dto';
 
 /**
  * User profile
  */
 @Injectable()
-export class BankProfile extends AutomapperProfile {
+export class DepartamentProfile extends AutomapperProfile {
   constructor(@InjectMapper() mapper: Mapper) {
     super(mapper);
   }
@@ -20,8 +20,8 @@ export class BankProfile extends AutomapperProfile {
    */
   override get profile() {
     return (mapper) => {
-      createMap(mapper, Bank, BankResponseDto);
-      createMap(mapper, BankRequestDto, Bank);
+      createMap(mapper, Department, DepartmentResponseDto);
+      createMap(mapper, DepartmentRequestDto, Department);
     };
   }
 }

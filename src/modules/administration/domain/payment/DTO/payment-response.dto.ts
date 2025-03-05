@@ -1,6 +1,5 @@
 import { AutoMap } from '@automapper/classes';
-import { Bank } from 'src/modules/maintenance/domain/bank/bank.entity';
-import { Order } from '../../orders/orders.entity';
+import { Tool } from '../../tool/tool.entity';
 
 export class PaymentResponseDto {
   @AutoMap()
@@ -25,13 +24,7 @@ export class PaymentResponseDto {
   order_number: string;
 
   @AutoMap()
-  order: Order;
-
-  /*   @AutoMap()
-  customer: Customers; */
-
-  @AutoMap()
-  bank: Bank;
+  tool: Tool;
 
   @AutoMap()
   state: boolean;

@@ -34,9 +34,9 @@ export class UserController {
   ) {}
 
   @Post()
-  async createUser(@Body() userData: UserRequestDto): Promise<UserResponseDto> {
-    const user = await this._createUserService.handle(userData);
-    return this._mapper.map(user, UserResponseDto);
+  async createUser(@Body() userDto: UserRequestDto): Promise<UserResponseDto> {
+    const createdUser = await this._createUserService.handle(userDto);
+    return createdUser; // No vuelvas a aplicar mapper.map aquí.
   }
 
   @Get()

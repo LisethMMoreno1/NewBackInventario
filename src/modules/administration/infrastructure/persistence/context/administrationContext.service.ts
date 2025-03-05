@@ -4,15 +4,15 @@ import { InjectDataSource } from '@nestjs/typeorm';
 import { Request } from 'express';
 import { Module } from 'src/modules/administration/domain/module/module.entity';
 import { Option } from 'src/modules/administration/domain/option/option.entity';
-import { OrderDetails } from 'src/modules/administration/domain/orderDetails/orderDetails.entity';
-import { Order } from 'src/modules/administration/domain/orders/orders.entity';
-import { OrderStatus } from 'src/modules/administration/domain/orderStatus/orderStatus.entity';
 import { Payment } from 'src/modules/administration/domain/payment/payment.entity';
 import { Role } from 'src/modules/administration/domain/rol/rol.entity';
 import { RoleModule } from 'src/modules/administration/domain/roleModule/roleModule.entity';
 import { RoleOption } from 'src/modules/administration/domain/roleOption/roleOption.entity';
 import { Submodule } from 'src/modules/administration/domain/subModule/subModule.entity';
+import { Tool } from 'src/modules/administration/domain/tool/tool.entity';
 import { User } from 'src/modules/administration/domain/user/user.entity';
+import { VehicleDeliveryRecord } from 'src/modules/administration/domain/vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
+import { VehicleReceptionRecord } from 'src/modules/administration/domain/vehicleReceptionRecord/vehicleReceptionRecord.entity';
 import { AbstractRepository } from 'src/modules/database/classes/abstractRepository';
 import { GenericRepository } from 'src/modules/database/classes/genericRepository';
 import { DataSource } from 'typeorm';
@@ -33,24 +33,9 @@ export class AdministrationContext {
   role: AbstractRepository<Role>;
 
   /**
-   * Repository for the 'Order' entity.
-   */
-  order: AbstractRepository<Order>;
-
-  /**
-   * Repository for the 'OrderDetails' entity.
-   */
-  orderDetails: AbstractRepository<OrderDetails>;
-
-  /**
    * Repository for the 'Payment' entity.
    */
   payment: AbstractRepository<Payment>;
-
-  /**
-   * Repository for the 'OrderStatus' entity.
-   */
-  orderStatus: AbstractRepository<OrderStatus>;
 
   /**
    * Repository for the 'Customers' entity.
@@ -82,6 +67,21 @@ export class AdministrationContext {
   roleOption: AbstractRepository<RoleOption>;
 
   /**
+   * Repository for the 'Tool' entity.
+   */
+  tool: AbstractRepository<Tool>;
+
+  /**
+   * Repository for the 'Tool' entity.
+   */
+  vehicleDeliveryRecord: AbstractRepository<VehicleDeliveryRecord>;
+
+  /**
+   * Repository for the 'Tool' entity.
+   */
+  vehicleReceptionRecord: AbstractRepository<VehicleReceptionRecord>;
+  VehicleReceptionRecord: any;
+  /**
    * Creates an instance of AdministrationContextService.
    * @param dataSource - The data source to be injected.
    * @param request - The request object to be injected.
@@ -95,28 +95,19 @@ export class AdministrationContext {
       this.dataSource,
       this.request,
     );
+    this.tool = new GenericRepository<Tool>(
+      Tool,
+      this.dataSource,
+      this.request,
+    );
     this.role = new GenericRepository<Role>(
       Role,
       this.dataSource,
       this.request,
     );
-    this.order = new GenericRepository<Order>(
-      Order,
-      this.dataSource,
-      this.request,
-    );
-    this.orderDetails = new GenericRepository<OrderDetails>(
-      OrderDetails,
-      this.dataSource,
-      this.request,
-    );
+
     this.payment = new GenericRepository<Payment>(
       Payment,
-      this.dataSource,
-      this.request,
-    );
-    this.orderStatus = new GenericRepository<OrderStatus>(
-      OrderStatus,
       this.dataSource,
       this.request,
     );
@@ -143,6 +134,16 @@ export class AdministrationContext {
     );
     this.roleOption = new GenericRepository<RoleOption>(
       RoleOption,
+      this.dataSource,
+      this.request,
+    );
+    this.vehicleDeliveryRecord = new GenericRepository<VehicleDeliveryRecord>(
+      VehicleDeliveryRecord,
+      this.dataSource,
+      this.request,
+    );
+    this.vehicleReceptionRecord = new GenericRepository<VehicleReceptionRecord>(
+      VehicleReceptionRecord,
       this.dataSource,
       this.request,
     );

@@ -14,7 +14,7 @@ export class GetOneUserService {
   async handle(identificationNumber: number): Promise<User | null> {
     const user = await this._userRepository.getOne({
       where: { identificationNumber },
-      relations: ['role', 'genre', 'typeOfIdentification'],
+      relations: ['role', 'tool'],
     });
 
     if (!user) {

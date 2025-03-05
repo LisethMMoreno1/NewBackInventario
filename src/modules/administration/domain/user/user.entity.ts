@@ -10,12 +10,9 @@ import {
 } from 'typeorm';
 import { Role } from '../rol/rol.entity';
 import { RoleModule } from '../roleModule/roleModule.entity';
-import { TypeOfGender } from 'src/modules/maintenance/domain/type-of-gender/typeGender.entity';
-import { TypeOfIdentification } from 'src/modules/maintenance/domain/type-of-identification/typeidentification.entity';
+import { Tool } from '../tool/tool.entity';
 
-@Entity({
-  name: 'Users',
-})
+@Entity({ name: 'Users' })
 export class User {
   @PrimaryGeneratedColumn()
   @AutoMap()
@@ -37,13 +34,15 @@ export class User {
   @AutoMap()
   password: string;
 
-  @ManyToOne(() => TypeOfGender, (typeOfGender) => typeOfGender.users)
-  @JoinColumn({ name: 'id_typeOfGender' })
-  typeOfGender: number;
+  // Se almacena el código de la herramienta
+  @AutoMap()
+  @Column({ length: 50 })
+  code_tool: string;
 
-  @ManyToOne(() => TypeOfIdentification, (typeOfId) => typeOfId.users)
-  @JoinColumn({ name: 'id_typeIdentification' })
-  typeOfIdentification: TypeOfIdentification;
+  @ManyToOne(() => Tool, (tool) => tool.users)
+  @JoinColumn({ name: 'code_tool', referencedColumnName: 'code' })
+  @AutoMap()
+  tool: Tool;
 
   @Column({ type: 'boolean', default: true })
   @AutoMap()

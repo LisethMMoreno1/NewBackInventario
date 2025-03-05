@@ -16,11 +16,13 @@ export class UserResponseDto {
   @AutoMap()
   password?: string;
 
+  // Se espera el ID de la herramienta (obtenido de la relación) o su otro identificador.
+  // Ahora se espera un objeto Tool o un DTO para Tool
   @AutoMap()
-  typeOfGender: string;
+  tool: number;
 
   @AutoMap()
-  typeOfIdentification: number;
+  code_tool: string;
 
   @AutoMap()
   state: boolean;

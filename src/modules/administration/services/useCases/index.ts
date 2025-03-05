@@ -1,22 +1,25 @@
 /* istanbul ignore file */
 import { ModuleProfile } from '../profiles/module/module.profile';
 import { OptionProfile } from '../profiles/option/option.profile';
-import { OrderDetailsProfile } from '../profiles/orderDetails/orderDetails.profile';
-import { OrdersProfile } from '../profiles/orders/orders.profile';
-import { orderStatusProfile } from '../profiles/orderStatus/orderStatus.profile';
 import { PaymentProfile } from '../profiles/payment/payment.profile';
 import { RoleProfile } from '../profiles/rol/rol.profile';
 import { RoleModuleProfile } from '../profiles/roleModule/roleModule.profile';
 import { RoleOptionProfile } from '../profiles/roleOption/roleOption.profile';
 import { subModuleProfile } from '../profiles/subModule/subModule.profile';
+import { ToolProfile } from '../profiles/tool/tool.profile';
 import { UserProfile } from '../profiles/user/user.profile';
+import { VehicleDeliveryRecordProfile } from '../profiles/vehicleDeliveryRecord/vehicleDeliveryRecord.profile';
+import { VehicleReceptionRecordProfile } from '../profiles/vehicleReceptionRecord/vehicleReceptionRecord.profile';
 import { ModuleServices } from './module';
 import { OptionServices } from './option';
 import { RoleServices } from './rol';
 import { RoleModuleServices } from './roleModule';
 import { RoleOptionServices } from './roleOption';
 import { SubModuleServices } from './subModule';
+import { ToolServices } from './tool';
 import { UserServices } from './user';
+import { VehicleDeliveryRecordService } from './vehicleDeliveryRecord';
+import { VehicleReceptionRecordService } from './vehicleReceptionRecord';
 
 /**
  * Array of administration services.
@@ -29,6 +32,9 @@ export const AdministrationServices = [
   ...SubModuleServices,
   ...RoleModuleServices,
   ...RoleOptionServices,
+  ...ToolServices,
+  ...VehicleReceptionRecordService,
+  ...VehicleDeliveryRecordService,
 ];
 
 /**
@@ -37,14 +43,13 @@ export const AdministrationServices = [
 export const AdministrationProfiles = [
   UserProfile,
   RoleProfile,
-
-  OrderDetailsProfile,
-  OrdersProfile,
-  orderStatusProfile,
+  ToolProfile,
   PaymentProfile,
   subModuleProfile,
   RoleOptionProfile,
   RoleModuleProfile,
   OptionProfile,
   ModuleProfile,
+  VehicleDeliveryRecordProfile,
+  VehicleReceptionRecordProfile,
 ];

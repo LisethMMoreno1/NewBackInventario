@@ -11,9 +11,8 @@ import { UserRequestDto } from 'src/modules/administration/domain/user/DTO/user-
 import { UserResponseDto } from 'src/modules/administration/domain/user/DTO/user-response.dto';
 import { User } from 'src/modules/administration/domain/user/user.entity';
 import { RolRepository } from 'src/modules/administration/infrastructure/persistence/repositories/rol.repository';
+import { ToolRepository } from 'src/modules/administration/infrastructure/persistence/repositories/tool.repository';
 import { UserRepository } from 'src/modules/administration/infrastructure/persistence/repositories/user.repository';
-import { TypeOfIdentificationRepository } from 'src/modules/maintenance/infrastruture/persistence/repositories/typeIdentification.repository';
-import { TypeOfGenderRepository } from 'src/modules/maintenance/infrastruture/persistence/repositories/typGender.repository';
 
 @Injectable()
 export class CreateUserService {
@@ -21,14 +20,13 @@ export class CreateUserService {
     @InjectMapper() private readonly _mapper: Mapper,
     private readonly _userRepository: UserRepository,
     private readonly _rolRepository: RolRepository,
-    private readonly _typeOfIdentificationRepository: TypeOfIdentificationRepository,
-    private readonly _typeOfGenderRepository: TypeOfGenderRepository,
+    private readonly _toolRepository: ToolRepository,
   ) {}
 
   async handle(userRequest: UserRequestDto): Promise<UserResponseDto> {
     try {
-      if (!userRequest.typeOfIdentification?.id_typeIdentification) {
-        throw new BadRequestException('typeOfIdentification ID is required');
+      if (!userRequest.code_tool) {
+        throw new BadRequestException('Tool code is required');
       }
 
       console.log('Fetching role...');
@@ -41,14 +39,13 @@ export class CreateUserService {
         );
       }
 
-      console.log('Fetching typeOfIdentification...');
-      const typeOfIdentification =
-        await this._typeOfIdentificationRepository.getById(
-          userRequest.typeOfIdentification.id_typeIdentification,
-        );
-      if (!typeOfIdentification) {
+      console.log('Fetching tool...');
+      const tool = await this._toolRepository.getOne({
+        where: { code: userRequest.code_tool },
+      });
+      if (!tool) {
         throw new NotFoundException(
-          `TypeOfIdentification with ID ${userRequest.typeOfIdentification.id_typeIdentification} not found`,
+          `Tool with code ${userRequest.code_tool} not found`,
         );
       }
 
@@ -58,7 +55,7 @@ export class CreateUserService {
       );
       if (existingUser) {
         throw new ConflictException(
-          `User with identificationNumber ${userRequest.identificationNumber} already exists`,
+          `User with identification number ${userRequest.identificationNumber} already exists`,
         );
       }
 
@@ -69,29 +66,37 @@ export class CreateUserService {
       const newUser = this._mapper.map(userRequest, UserRequestDto, User);
       newUser.password = hashedPassword;
       newUser.role = role;
-      newUser.typeOfIdentification = typeOfIdentification;
-      newUser.state = true;
-
-      console.log('Fetching typeOfGender...');
-      const typeOfGender = await this._typeOfGenderRepository.getById(
-        userRequest.typeOfGender.id_typeOfGender,
-      );
-      if (!typeOfGender) {
-        throw new NotFoundException(
-          `TypeOfGender with ID ${userRequest.typeOfGender.id_typeOfGender} not found`,
-        );
-      }
-
-      newUser.typeOfGender = typeOfGender.id_typeOfGender;
+      newUser.tool = tool;
+      newUser.state = userRequest.state ?? true;
+      newUser.code_tool = userRequest.code_tool;
 
       console.log('Saving user...');
       const savedUser = await this._userRepository.save(newUser);
+      console.log('Saved user:', savedUser);
+      console.log(
+        'Is savedUser an instance of User?',
+        savedUser instanceof User,
+      );
+      console.log('savedUser.constructor.name:', savedUser.constructor.name);
 
-      console.log('Mapping response...', savedUser);
-      const userResponse = this._mapper.map(savedUser, User, UserResponseDto);
+      console.log('Mapping response...');
+      // Si savedUser no es instancia de User (aunque en este caso sí lo es), forzamos la instancia.
+      const userEntity =
+        savedUser instanceof User
+          ? savedUser
+          : Object.assign(new User(), savedUser);
+      console.log('userEntity.constructor.name:', userEntity.constructor.name);
 
-      console.log('User created successfully.');
-      return userResponse;
+      const mappedResponse = this._mapper.map(
+        userEntity,
+        User,
+        UserResponseDto,
+      );
+      console.log('Mapped response:', mappedResponse);
+
+      // NOTA: Asegúrate de que en el controlador no se aplique un mapeo adicional,
+      // ya que el servicio ya retorna un objeto de tipo UserResponseDto.
+      return mappedResponse;
     } catch (error) {
       console.error('Error creating user:', error);
       throw error;

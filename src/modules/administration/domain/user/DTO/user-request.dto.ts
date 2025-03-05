@@ -7,8 +7,6 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { TypeOfGender } from 'src/modules/maintenance/domain/type-of-gender/typeGender.entity';
-import { TypeOfIdentification } from 'src/modules/maintenance/domain/type-of-identification/typeidentification.entity';
 import { Role } from '../../rol/rol.entity';
 import { RoleModule } from '../../roleModule/roleModule.entity';
 
@@ -34,16 +32,14 @@ export class UserRequestDto {
   @AutoMap()
   password: string;
 
-  @IsNotEmpty()
+  // Se espera únicamente el código de la herramienta.
+  @IsNotEmpty({ message: 'code_tool must not be empty' })
+  @IsString()
   @AutoMap()
-  typeOfGender: TypeOfGender;
-
-  @AutoMap()
-  @IsNotEmpty()
-  typeOfIdentification: TypeOfIdentification;
+  code_tool: string;
 
   @IsBoolean()
-  @IsOptional() // Si no es obligatorio
+  @IsOptional()
   state?: boolean;
 
   @IsOptional()

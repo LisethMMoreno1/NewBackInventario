@@ -8,8 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Order } from '../orders/orders.entity';
-import { Bank } from 'src/modules/maintenance/domain/bank/bank.entity';
+import { Tool } from '../tool/tool.entity';
 
 @Entity('payment')
 export class Payment {
@@ -41,21 +40,10 @@ export class Payment {
   @AutoMap()
   order_number: string;
 
-  @ManyToOne(() => Order, (order) => order.payments, { nullable: false })
-  @JoinColumn({ name: 'id_order' })
+  @ManyToOne(() => Tool, (tool) => tool.payments, { nullable: false })
+  @JoinColumn({ name: 'id_tool' })
   @AutoMap()
-  order: Order;
-
-  /*   @ManyToOne(() => Customers, (customer) => customer.payments, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'id_customer' })
-  customer: Customers; */
-
-  @ManyToOne(() => Bank, (bank) => bank.payments, { nullable: false })
-  @JoinColumn({ name: 'id_bank' })
-  @AutoMap()
-  bank: Bank;
+  tool: Tool;
 
   @Column({ type: 'boolean', default: true })
   @AutoMap()
