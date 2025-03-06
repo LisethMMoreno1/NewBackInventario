@@ -10,9 +10,13 @@ import {
 } from '@nestjs/common';
 import { ToolRequestDto } from 'src/modules/administration/domain/tool/DTO/tool-request.dto';
 import { ToolResponseDto } from 'src/modules/administration/domain/tool/DTO/tool-response.dto';
+import { ToolUpdateDto } from 'src/modules/administration/domain/tool/DTO/tool-update.dto';
+import { Tool } from 'src/modules/administration/domain/tool/tool.entity';
 import { CreateToolService } from 'src/modules/administration/services/useCases/tool/createTool.service';
 import { DeleteToolService } from 'src/modules/administration/services/useCases/tool/deleteTool.service';
+import { GetAllCodeService } from 'src/modules/administration/services/useCases/tool/getAllCode.service';
 import { GetAllToolService } from 'src/modules/administration/services/useCases/tool/getAllTool.service';
+import { GetAllTypeService } from 'src/modules/administration/services/useCases/tool/getAlltype.service';
 import { GetOneToolService } from 'src/modules/administration/services/useCases/tool/getOneTool.service';
 import { UpdateToolService } from 'src/modules/administration/services/useCases/tool/updateTool.service';
 
@@ -24,6 +28,8 @@ export class ToolController {
     private readonly _getAllToolService: GetAllToolService,
     private readonly _updateToolService: UpdateToolService,
     private readonly _deleteToolService: DeleteToolService,
+    private readonly _getAllTypeService: GetAllTypeService,
+    private readonly _getAllCodeService: GetAllCodeService,
   ) {}
 
   @Get()
@@ -50,13 +56,23 @@ export class ToolController {
   @Put(':id')
   async update(
     @Param('id') id: number,
-    @Body() toolRequestDto: ToolRequestDto,
+    @Body() toolUpdateDto: ToolUpdateDto,
   ): Promise<ToolResponseDto> {
-    return await this._updateToolService.update(id, toolRequestDto);
+    return await this._updateToolService.update(id, toolUpdateDto);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
     await this._deleteToolService.handle(id);
+  }
+
+  @Get('type/:type')
+  async getByType(@Param('type') type: string): Promise<Tool[]> {
+    return this._getAllTypeService.handle(type);
+  }
+
+  @Get('code/:code')
+  async getByCode(@Param('code') code: string): Promise<Tool[]> {
+    return this._getAllCodeService.handle(code);
   }
 }

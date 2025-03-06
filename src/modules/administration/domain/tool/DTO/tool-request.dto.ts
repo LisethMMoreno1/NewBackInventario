@@ -24,7 +24,7 @@ export class ToolRequestDto {
   description?: string;
 
   @AutoMap()
-  state: boolean;
+  state?: boolean;
 
   @AutoMap()
   created_at: Date;

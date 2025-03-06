@@ -1,6 +1,8 @@
 import { CreateToolService } from './createTool.service';
 import { DeleteToolService } from './deleteTool.service';
+import { GetAllCodeService } from './getAllCode.service';
 import { GetAllToolService } from './getAllTool.service';
+import { GetAllTypeService } from './getAlltype.service';
 import { GetOneToolService } from './getOneTool.service';
 import { UpdateToolService } from './updateTool.service';
 
@@ -13,4 +15,6 @@ export const ToolServices = [
   GetAllToolService,
   GetOneToolService,
   UpdateToolService,
+  GetAllTypeService,
+  GetAllCodeService,
 ];

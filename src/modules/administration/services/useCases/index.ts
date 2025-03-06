@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 import { ModuleProfile } from '../profiles/module/module.profile';
 import { OptionProfile } from '../profiles/option/option.profile';
+import { OrderProfile } from '../profiles/order/order.profile';
 import { PaymentProfile } from '../profiles/payment/payment.profile';
 import { RoleProfile } from '../profiles/rol/rol.profile';
 import { RoleModuleProfile } from '../profiles/roleModule/roleModule.profile';
@@ -12,6 +13,7 @@ import { VehicleDeliveryRecordProfile } from '../profiles/vehicleDeliveryRecord/
 import { VehicleReceptionRecordProfile } from '../profiles/vehicleReceptionRecord/vehicleReceptionRecord.profile';
 import { ModuleServices } from './module';
 import { OptionServices } from './option';
+import { OrderServices } from './order/indext';
 import { RoleServices } from './rol';
 import { RoleModuleServices } from './roleModule';
 import { RoleOptionServices } from './roleOption';
@@ -35,6 +37,7 @@ export const AdministrationServices = [
   ...ToolServices,
   ...VehicleReceptionRecordService,
   ...VehicleDeliveryRecordService,
+  ...OrderServices,
 ];
 
 /**
@@ -52,4 +55,5 @@ export const AdministrationProfiles = [
   ModuleProfile,
   VehicleDeliveryRecordProfile,
   VehicleReceptionRecordProfile,
+  OrderProfile,
 ];

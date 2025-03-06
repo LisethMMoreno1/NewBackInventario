@@ -13,11 +13,21 @@ export class CreateVehicleReceptionRecordService {
   ) {}
 
   async handle(createDto: VehicleReceptionRecordRequestDto) {
-    const receptionRecord = new VehicleReceptionRecord();
-    receptionRecord.arrivalCondition = createDto.arrivalCondition; // Ensure this is provided
-    // Assign other fields from createDto...
+    console.log('DTO recibido:', createDto);
 
-    console.log(receptionRecord); // Debugging: Log the entity before saving
+    const receptionRecord = new VehicleReceptionRecord();
+    receptionRecord.arrivalDate = new Date(createDto.arrivalDate);
+    receptionRecord.arrivalCondition =
+      createDto.arrivalCondition || 'Desconocido';
+    receptionRecord.diagnosis = createDto.diagnosis;
+    receptionRecord.diagnosisCost = createDto.diagnosisCost;
+    receptionRecord.repairProposals = createDto.repairProposals;
+    receptionRecord.invoiceDetails = createDto.invoiceDetails;
+    receptionRecord.contractSigned = createDto.contractSigned;
+    receptionRecord.advancePayment = createDto.advancePayment;
+
+    console.log('Entidad manualmente creada:', receptionRecord);
+
     return await this._vehicleReceptionRecord.create(receptionRecord);
   }
 }

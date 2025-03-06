@@ -1,13 +1,10 @@
-import { createMap, type Mapper } from '@automapper/core';
+import { createMap, Mapper } from '@automapper/core';
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
-import { VehicleDeliveryRecordResponseDto } from 'src/modules/administration/domain/VehicleDeliveryRecord/DTO/VehicleDeliveryRecord-response.dto';
+import { VehicleDeliveryRecordResponseDto } from 'src/modules/administration/domain/vehicleDeliveryRecord/DTO/vehicleDeliveryRecord-response.dto';
 import { VehicleDeliveryRecordRequestDto } from 'src/modules/administration/domain/vehicleDeliveryRecord/DTO/vehicleDeliveryRecord-resquest.dto';
-import { VehicleDeliveryRecord } from 'src/modules/administration/domain/VehicleDeliveryRecord/VehicleDeliveryRecord.entity';
+import { VehicleDeliveryRecord } from 'src/modules/administration/domain/vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
 
-/**
- * VehicleDeliveryRecord profile
- */
 @Injectable()
 export class VehicleDeliveryRecordProfile extends AutomapperProfile {
   constructor(@InjectMapper() mapper: Mapper) {
@@ -16,8 +13,6 @@ export class VehicleDeliveryRecordProfile extends AutomapperProfile {
 
   override get profile() {
     return (mapper: Mapper) => {
-      console.log('Configurando el mapeo entre DTO y Entidad...');
-
       createMap(mapper, VehicleDeliveryRecordRequestDto, VehicleDeliveryRecord);
       createMap(
         mapper,

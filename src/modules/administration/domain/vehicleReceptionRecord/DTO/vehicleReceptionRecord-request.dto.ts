@@ -1,51 +1,43 @@
+import { AutoMap } from '@automapper/classes';
 import {
+  IsBoolean,
   IsDateString,
   IsNotEmpty,
-  IsOptional,
-  IsString,
-  IsBoolean,
   IsNumber,
+  IsString,
 } from 'class-validator';
-import { AutoMap } from '@automapper/classes';
 
 export class VehicleReceptionRecordRequestDto {
   @IsNotEmpty()
   @IsDateString()
   @AutoMap()
-  arrivalDate: string; // ISO date string
+  arrivalDate: string;
 
-  @IsNotEmpty()
-  @IsString()
   @AutoMap()
+  @IsString()
   arrivalCondition: string;
 
-  @IsOptional()
-  @IsString()
   @AutoMap()
-  diagnosis?: string;
+  @IsString()
+  diagnosis: string;
 
-  @IsOptional()
+  @AutoMap()
   @IsNumber()
-  @AutoMap()
-  diagnosisCost?: number;
+  diagnosisCost: number;
 
-  @IsOptional()
+  @AutoMap()
   @IsString()
-  @AutoMap()
-  repairProposals?: string;
+  repairProposals: string;
 
-  @IsOptional()
+  @AutoMap()
   @IsString()
-  @AutoMap()
-  invoiceDetails?: string;
+  invoiceDetails: string;
 
-  @IsOptional()
+  @AutoMap()
   @IsBoolean()
-  @AutoMap()
-  contractSigned?: boolean;
+  contractSigned: boolean;
 
-  @IsOptional()
-  @IsNumber()
   @AutoMap()
-  advancePayment?: number;
+  @IsNumber()
+  advancePayment: number;
 }

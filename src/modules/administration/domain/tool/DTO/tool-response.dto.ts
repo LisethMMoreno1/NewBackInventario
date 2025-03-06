@@ -17,7 +17,7 @@ export class ToolResponseDto {
   description?: string;
 
   @AutoMap()
-  state: boolean;
+  state?: boolean;
 
   @AutoMap()
   created_at: Date;

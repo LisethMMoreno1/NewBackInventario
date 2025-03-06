@@ -1,5 +1,5 @@
 import { HttpException, Injectable, Scope } from '@nestjs/common';
-import { AdministrationContext } from '../context/administrationContext.service';
+import { Tool } from 'src/modules/administration/domain/tool/tool.entity';
 import {
   DeleteCriteriaType,
   GetAllCriteriaType,
@@ -7,7 +7,8 @@ import {
   SaveOptionsType,
   UpdateCriteriaType,
 } from 'src/modules/database/types';
-import { Tool } from 'src/modules/administration/domain/tool/tool.entity';
+import { AdministrationContext } from '../context/administrationContext.service';
+import { Like } from 'typeorm';
 
 @Injectable({ scope: Scope.REQUEST })
 export class ToolRepository {
@@ -98,5 +99,31 @@ export class ToolRepository {
 
   async getByIdentificationNumber(id: number): Promise<Tool | null> {
     return this.getOne({ where: { id } });
+  }
+
+  async getByType(type: string): Promise<Tool[]> {
+    try {
+      // Usamos find() para filtrar correctamente por la columna 'type'
+      return await this._context.tool.getAll({ where: { type } });
+    } catch (error) {
+      throw new HttpException(
+        `Error de DB: ${error instanceof Error ? error.message : 'Error desconocido'}`,
+        500,
+      );
+    }
+  }
+
+  async getByCode(code: string): Promise<Tool[]> {
+    try {
+      // Se utiliza Like para buscar coincidencias parciales en el campo 'code'
+      return await this._context.tool.getAll({
+        where: { code: Like(`%${code}%`) },
+      });
+    } catch (error) {
+      throw new HttpException(
+        `Error de DB: ${error instanceof Error ? error.message : 'Error desconocido'}`,
+        500,
+      );
+    }
   }
 }

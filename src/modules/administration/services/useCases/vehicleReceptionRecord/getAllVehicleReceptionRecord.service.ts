@@ -23,12 +23,15 @@ export class GetAllVehicleReceptionRecordService {
     }
 
     // Mapear cada registro a DTO
-    return records.map((record) =>
+    const mappedRecords = records.map((record) =>
       this._mapper.map(
         record,
         VehicleReceptionRecord,
         VehicleReceptionRecordResponseDto,
       ),
     );
+    console.log('Mapped records:', mappedRecords); // Depuración
+
+    return mappedRecords;
   }
 }

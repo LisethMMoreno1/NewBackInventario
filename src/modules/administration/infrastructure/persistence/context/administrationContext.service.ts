@@ -4,6 +4,7 @@ import { InjectDataSource } from '@nestjs/typeorm';
 import { Request } from 'express';
 import { Module } from 'src/modules/administration/domain/module/module.entity';
 import { Option } from 'src/modules/administration/domain/option/option.entity';
+import { Order } from 'src/modules/administration/domain/order/order.entity';
 import { Payment } from 'src/modules/administration/domain/payment/payment.entity';
 import { Role } from 'src/modules/administration/domain/rol/rol.entity';
 import { RoleModule } from 'src/modules/administration/domain/roleModule/roleModule.entity';
@@ -80,7 +81,11 @@ export class AdministrationContext {
    * Repository for the 'Tool' entity.
    */
   vehicleReceptionRecord: AbstractRepository<VehicleReceptionRecord>;
-  VehicleReceptionRecord: any;
+
+  /**
+   * Repository for the 'Tool' entity.
+   */
+  order: AbstractRepository<Order>;
   /**
    * Creates an instance of AdministrationContextService.
    * @param dataSource - The data source to be injected.
@@ -97,6 +102,11 @@ export class AdministrationContext {
     );
     this.tool = new GenericRepository<Tool>(
       Tool,
+      this.dataSource,
+      this.request,
+    );
+    this.order = new GenericRepository<Order>(
+      Order,
       this.dataSource,
       this.request,
     );

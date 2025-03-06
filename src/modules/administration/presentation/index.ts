@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 import { ModuleController } from './controllers/module/module.controller';
 import { OptionController } from './controllers/option/option.controller';
+import { OrderController } from './controllers/order/order.controller';
 import { RoleController } from './controllers/rol/role.controller';
 import { RoleModuleController } from './controllers/roleModule/roleModule.controller';
 import { RoleOptionController } from './controllers/roleOption/roleOption.controller';
@@ -21,4 +22,5 @@ export const Controllers = [
   ToolController,
   VehicleReceptionRecordController,
   VehicleDeliveryRecordController,
+  OrderController,
 ];

@@ -63,11 +63,21 @@ export class VehicleReceptionRecordRepository {
    * @returns A promise that resolves to the found VehicleReceptionRecord.
    * @throws HttpException if there's an error finding the record in the database.
    */
-  async getOne(options: {
-    where: { id: number };
-  }): Promise<VehicleReceptionRecord | null> {
-    return this.getOne(options);
+  async getOne(options: any): Promise<VehicleReceptionRecord | null> {
+    try {
+      if (!options || !options.where) {
+        throw new Error('Debes proporcionar condiciones de búsqueda válidas.');
+      }
+
+      return await this._context.vehicleReceptionRecord.getOne(options);
+    } catch (error) {
+      throw new HttpException(
+        `Error de DB: ${error?.message}`,
+        error?.status || 500,
+      );
+    }
   }
+
   /**
    * Updates a vehicle reception record in the database.
    * @param criteria - The criteria to find the record to update.

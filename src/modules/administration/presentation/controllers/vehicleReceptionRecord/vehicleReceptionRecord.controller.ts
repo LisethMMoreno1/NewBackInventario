@@ -59,16 +59,8 @@ export class VehicleReceptionRecordController {
    * @throws NotFoundException if the record does not exist.
    */
   @Get(':id')
-  async getOne(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<VehicleReceptionRecordResponseDto> {
-    const record = await this._getOneVehicleReceptionRecordService.handle(id);
-    if (!record) {
-      throw new NotFoundException(
-        `VehicleReceptionRecord with ID ${id} not found.`,
-      );
-    }
-    return record;
+  async getOne(@Param('id') id: number) {
+    return this._getOneVehicleReceptionRecordService.handle(id);
   }
 
   /**

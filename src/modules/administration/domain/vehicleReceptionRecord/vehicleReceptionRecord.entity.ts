@@ -1,52 +1,55 @@
+import { AutoMap } from '@automapper/classes';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
-  OneToOne,
+  Entity,
   JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { VehicleDeliveryRecord } from '../vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
+import { Order } from '../order/order.entity';
 
-@Entity({ name: 'vehicle_reception_records' })
+@Entity('vehicle_reception_records')
 export class VehicleReceptionRecord {
   @PrimaryGeneratedColumn()
+  @AutoMap()
   id: number;
 
-  // Date when the vehicle arrives at the workshop.
-  @CreateDateColumn({ type: 'timestamp' })
-  arrivalDate: Date; // Automatically set to the current timestamp on creation
+  @Column()
+  @AutoMap()
+  arrivalDate: Date;
 
-  // Conditions of the vehicle upon arrival.
-  @Column({ type: 'text', nullable: false }) // Mandatory field
+  @Column()
+  @AutoMap()
   arrivalCondition: string;
 
-  // Diagnosis: evaluation of the vehicle's condition.
-  @Column({ type: 'text', nullable: true }) // Optional field
+  @Column()
+  @AutoMap()
   diagnosis: string;
 
-  // Cost of the diagnosis.
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true }) // Optional field
+  @Column()
+  @AutoMap()
   diagnosisCost: number;
 
-  // Repair proposals based on the diagnosis.
-  @Column({ type: 'text', nullable: true }) // Optional field
+  @Column()
+  @AutoMap()
   repairProposals: string;
 
-  // Invoice details for the diagnostic service.
-  @Column({ type: 'text', nullable: true }) // Optional field
+  @Column()
+  @AutoMap()
   invoiceDetails: string;
 
-  // Indicates whether the service contract has been signed.
-  @Column({ type: 'boolean', default: false }) // Default value provided
+  @Column()
+  @AutoMap()
   contractSigned: boolean;
 
-  // Amount of the advance payment (e.g., 50% of the service cost).
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true }) // Optional field
+  @Column()
+  @AutoMap()
   advancePayment: number;
 
-  // One-to-one relationship with the vehicle delivery record.
   @OneToOne(
     () => VehicleDeliveryRecord,
     (delivery) => delivery.receptionRecord,
@@ -57,6 +60,9 @@ export class VehicleReceptionRecord {
   )
   @JoinColumn()
   deliveryRecord: VehicleDeliveryRecord;
+
+  @OneToMany(() => Order, (order) => order.receptionRecord)
+  orders: Order[]; // Relación con Order
 
   @CreateDateColumn()
   createdAt: Date;

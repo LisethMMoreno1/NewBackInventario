@@ -2,6 +2,7 @@ import { AutoMap } from '@automapper/classes';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -39,7 +40,7 @@ export class Tool {
   @OneToMany(() => User, (user) => user.tool)
   users: User[];
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: 'boolean', default: true })
   @AutoMap()
   state: boolean;
 
@@ -50,4 +51,7 @@ export class Tool {
   @UpdateDateColumn()
   @AutoMap()
   updated_at: Date;
+
+  @DeleteDateColumn({ nullable: true })
+  deleted_at?: Date;
 }

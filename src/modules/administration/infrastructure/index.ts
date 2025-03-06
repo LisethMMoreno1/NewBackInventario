@@ -12,6 +12,7 @@ import { ToolRepository } from './persistence/repositories/tool.repository';
 import { UserRepository } from './persistence/repositories/user.repository';
 import { VehicleReceptionRecordRepository } from './persistence/repositories/vehicleReceptionRecord.repository';
 import { VehicleDeliveryRecordRepository } from './persistence/repositories/vehicleDeliveryRecord.repository';
+import { OrderRepository } from './persistence/repositories/order.repository';
 /**
  * An array of persistence providers for the administration module.
  */
@@ -28,5 +29,6 @@ export const AdministrationPersistenceProvider = [
   ToolRepository,
   VehicleReceptionRecordRepository,
   VehicleDeliveryRecordRepository,
+  OrderRepository,
   MaintenanceContext,
 ];

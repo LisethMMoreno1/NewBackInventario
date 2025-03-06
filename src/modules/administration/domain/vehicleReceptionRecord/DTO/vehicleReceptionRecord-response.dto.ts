@@ -11,22 +11,22 @@ export class VehicleReceptionRecordResponseDto {
   arrivalCondition: string;
 
   @AutoMap()
-  diagnosis?: string;
+  diagnosis: string;
 
   @AutoMap()
-  diagnosisCost?: number;
+  diagnosisCost: number;
 
   @AutoMap()
-  repairProposals?: string;
+  repairProposals: string;
 
   @AutoMap()
-  invoiceDetails?: string;
+  invoiceDetails: string;
 
   @AutoMap()
   contractSigned: boolean;
 
   @AutoMap()
-  advancePayment?: number;
+  advancePayment: number;
 
   @AutoMap()
   createdAt: Date;

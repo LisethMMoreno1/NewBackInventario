@@ -14,6 +14,7 @@ export class GetAllVehicleDeliveryRecordService {
 
   async handle(): Promise<VehicleDeliveryRecordResponseDto[]> {
     const records = await this._vehicleDeliveryRecordRepository.getAll();
+    console.log(records); // Verifica los datos recuperados
     return records.map((record) =>
       this._mapper.map(
         record,
