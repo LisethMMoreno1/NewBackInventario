@@ -44,32 +44,30 @@ export class UserController {
     return this._getAllUserService.handle();
   }
 
-  @Get(':identificationNumber')
-  async findOne(
-    @Param('identificationNumber', ParseIntPipe) identificationNumber: number,
-  ): Promise<User> {
-    const user = await this._getOneUserService.handle(identificationNumber);
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
+    const user = await this._getOneUserService.handle(id);
     if (!user) {
       throw new NotFoundException(
-        `User with identification number ${identificationNumber} not found`,
+        `User with identification number ${id} not found`,
       );
     }
     return user;
   }
 
-  @Put(':identificationNumber')
+  @Put(':id')
   async update(
-    @Param('identificationNumber', ParseIntPipe) identificationNumber: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() loginData: Partial<User>,
   ): Promise<User> {
-    return this._updateUserService.handle(identificationNumber, loginData);
+    return this._updateUserService.handle(id, loginData);
   }
 
-  @Delete(':identificationNumber/:state')
+  @Delete(':id/:state')
   async delete(
-    @Param('identificationNumber', ParseIntPipe) identificationNumber: number,
+    @Param('id', ParseIntPipe) id: number,
     @Param('state', ParseIntPipe) state: number,
   ): Promise<boolean> {
-    return this._deleteUserService.handle(identificationNumber, state);
+    return this._deleteUserService.handle(id, state);
   }
 }

@@ -7,8 +7,6 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { Role } from '../../rol/rol.entity';
-import { RoleModule } from '../../roleModule/roleModule.entity';
 
 export class UserRequestDto {
   @IsNotEmpty()
@@ -46,12 +44,4 @@ export class UserRequestDto {
   @IsString()
   @AutoMap()
   accessToken: string;
-
-  @IsNotEmpty()
-  @AutoMap()
-  role: Role;
-
-  @IsOptional()
-  @AutoMap()
-  roleModule: RoleModule;
 }

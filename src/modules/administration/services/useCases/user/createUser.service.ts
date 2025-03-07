@@ -10,7 +10,6 @@ import * as bcrypt from 'bcryptjs';
 import { UserRequestDto } from 'src/modules/administration/domain/user/DTO/user-request.dto';
 import { UserResponseDto } from 'src/modules/administration/domain/user/DTO/user-response.dto';
 import { User } from 'src/modules/administration/domain/user/user.entity';
-import { RolRepository } from 'src/modules/administration/infrastructure/persistence/repositories/rol.repository';
 import { ToolRepository } from 'src/modules/administration/infrastructure/persistence/repositories/tool.repository';
 import { UserRepository } from 'src/modules/administration/infrastructure/persistence/repositories/user.repository';
 
@@ -19,7 +18,7 @@ export class CreateUserService {
   constructor(
     @InjectMapper() private readonly _mapper: Mapper,
     private readonly _userRepository: UserRepository,
-    private readonly _rolRepository: RolRepository,
+
     private readonly _toolRepository: ToolRepository,
   ) {}
 
@@ -29,7 +28,7 @@ export class CreateUserService {
         throw new BadRequestException('Tool code is required');
       }
 
-      console.log('Fetching role...');
+      /*   console.log('Fetching role...');
       const role = await this._rolRepository.getRoleById(
         userRequest.role.id_rol,
       );
@@ -38,7 +37,7 @@ export class CreateUserService {
           `Role with ID ${userRequest.role.id_rol} not found`,
         );
       }
-
+ */
       console.log('Fetching tool...');
       const tool = await this._toolRepository.getOne({
         where: { code: userRequest.code_tool },
@@ -65,7 +64,6 @@ export class CreateUserService {
       console.log('Mapping user...');
       const newUser = this._mapper.map(userRequest, UserRequestDto, User);
       newUser.password = hashedPassword;
-      newUser.role = role;
       newUser.tool = tool;
       newUser.state = userRequest.state ?? true;
       newUser.code_tool = userRequest.code_tool;

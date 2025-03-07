@@ -4,8 +4,7 @@ import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { User } from 'src/modules/administration/domain/user/user.entity';
 import { UserResponseDto } from 'src/modules/administration/domain/user/DTO/user-response.dto';
 import { UserRequestDto } from 'src/modules/administration/domain/user/DTO/user-request.dto';
-import { Role } from 'src/modules/administration/domain/rol/rol.entity';
-import { RoleRequestDto } from 'src/modules/administration/domain/rol/DTO/rol-request.dto';
+
 import { ToolRequestDto } from 'src/modules/administration/domain/tool/DTO/tool-request.dto';
 import { Tool } from 'src/modules/administration/domain/tool/tool.entity';
 
@@ -23,7 +22,7 @@ export class UserProfile extends AutomapperProfile {
       console.log('Mapping for UserRequestDto -> User configured');
 
       console.log('Configuring mapping for RoleRequestDto -> Role');
-      createMap(mapper, RoleRequestDto, Role);
+
       console.log('Mapping for RoleRequestDto -> Role configured');
 
       console.log('Configuring mapping for ToolRequestDto -> Tool');
@@ -43,25 +42,6 @@ export class UserProfile extends AutomapperProfile {
           mapFrom((src) => {
             console.log("Mapping 'tool' property. Source tool:", src.tool);
             return src.tool?.id;
-          }),
-        ),
-        // Para la propiedad 'role': extrae el nombre del rol
-        forMember(
-          (dest) => dest.role,
-          mapFrom((src) => {
-            console.log("Mapping 'role' property. Source role:", src.role);
-            return src.role?.name_rol;
-          }),
-        ),
-        // Para 'roleModule': transforma el objeto a un arreglo de strings
-        forMember(
-          (dest) => dest.roleModule,
-          mapFrom((src) => {
-            console.log(
-              "Mapping 'roleModule' property. Source roleModule:",
-              src.roleModule,
-            );
-            return src.roleModule ? [src.roleModule['name']] : [];
           }),
         ),
       );
