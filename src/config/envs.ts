@@ -59,6 +59,9 @@ const envsVars: EnvType = value;
 export const envs = {
   PORT: envsVars.PORT,
   DATABASE_URL: envsVars.DATABASE_URL,
+  JWT_SECRET:
+    process.env.JWT_SECRET ||
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
   // EMAIL_USER: envsVars.EMAIL_USER,
   // EMAIL_PASSWORD: envsVars.EMAIL_PASSWORD,
   // EMAIL_HOST: envsVars.EMAIL_HOST,

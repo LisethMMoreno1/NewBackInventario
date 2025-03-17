@@ -13,7 +13,6 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserRequestDto } from 'src/modules/administration/domain/user/DTO/user-request.dto';
-import { UserResponseDto } from 'src/modules/administration/domain/user/DTO/user-response.dto';
 import { User } from 'src/modules/administration/domain/user/user.entity';
 import { CreateUserService } from 'src/modules/administration/services/useCases/user/createUser.service';
 import { DeleteUserService } from 'src/modules/administration/services/useCases/user/deleteUser.service';
@@ -34,9 +33,10 @@ export class UserController {
   ) {}
 
   @Post()
-  async createUser(@Body() userDto: UserRequestDto): Promise<UserResponseDto> {
-    const createdUser = await this._createUserService.handle(userDto);
-    return createdUser; // No vuelvas a aplicar mapper.map aquí.
+  @Post()
+  async createUser(@Body() userRequest: UserRequestDto) {
+    userRequest.identificationNumber = Number(userRequest.identificationNumber);
+    return this._createUserService.handle(userRequest);
   }
 
   @Get()
@@ -63,11 +63,11 @@ export class UserController {
     return this._updateUserService.handle(id, loginData);
   }
 
-  @Delete(':id/:state')
+  @Delete(':identificationNumber/:state')
   async delete(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('identificationNumber', ParseIntPipe) identificationNumber: number,
     @Param('state', ParseIntPipe) state: number,
   ): Promise<boolean> {
-    return this._deleteUserService.handle(id, state);
+    return this._deleteUserService.handle(identificationNumber, state);
   }
 }

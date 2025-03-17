@@ -1,4 +1,5 @@
 /* istanbul ignore file */
+import { AuthService } from './auth/auth.service';
 import { CreateUserService } from './createUser.service';
 import { DeleteUserService } from './deleteUser.service';
 import { GetAllUserService } from './getAllUser.service';
@@ -14,4 +15,5 @@ export const UserServices = [
   GetAllUserService,
   UpdateUserService,
   DeleteUserService,
+  AuthService,
 ];

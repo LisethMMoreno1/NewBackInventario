@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { RolesEnum } from '../../role/roles.enum';
 
 export class UserResponseDto {
   @AutoMap()
@@ -16,13 +17,14 @@ export class UserResponseDto {
   @AutoMap()
   password?: string;
 
-  // Se espera el ID de la herramienta (obtenido de la relación) o su otro identificador.
-  // Ahora se espera un objeto Tool o un DTO para Tool
   @AutoMap()
   tool: number;
 
   @AutoMap()
   code_tool: string;
+
+  @AutoMap()
+  role: RolesEnum;
 
   @AutoMap()
   state: boolean;
@@ -36,8 +38,8 @@ export class UserResponseDto {
   @AutoMap()
   updated_at: Date;
 
-  @AutoMap()
-  role: string;
+  /*   @AutoMap()
+  role: string; */
 
   @AutoMap()
   roleModule: string[];

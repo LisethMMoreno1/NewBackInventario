@@ -9,7 +9,6 @@ import { DepartmentRepository } from './persistence/repositories/department.repo
 
 export const MaintenancePersistenceProvider = [
   MaintenanceContext,
-
   DepartmentRepository,
   CityRepository,
 ];

@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsString,
+  IsInt,
 } from 'class-validator';
 
 export class VehicleReceptionRecordRequestDto {
@@ -40,4 +41,9 @@ export class VehicleReceptionRecordRequestDto {
   @AutoMap()
   @IsNumber()
   advancePayment: number;
+
+  @IsInt()
+  @IsNotEmpty()
+  @AutoMap()
+  vehicleOwnerId: number;
 }

@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 
 import { Tool } from '../tool/tool.entity';
+import { RolesEnum } from '../role/roles.enum';
 
 @Entity({ name: 'Users' })
 export class User {
@@ -17,7 +18,8 @@ export class User {
   @AutoMap()
   id_user: number;
 
-  @Column({ type: 'integer', unique: true, nullable: false })
+  @Column({ type: 'varchar', nullable: false })
+  @AutoMap()
   identificationNumber: number;
 
   @Column()
@@ -37,12 +39,32 @@ export class User {
   @AutoMap()
   tool: Tool;
 
+  @AutoMap()
+  code_tool: string;
+
+  @Column({
+    type: 'enum',
+    enum: RolesEnum,
+    default: RolesEnum.OPERADOR_TECNICO,
+  })
+  @AutoMap()
+  role: RolesEnum;
+
   @Column({ type: 'boolean', default: true })
   @AutoMap()
   state: boolean;
 
+  @Column({ default: 0 })
+  failedAttempts: number;
+
+  @Column({ type: 'timestamp', nullable: true })
+  blockedUntil: Date;
+
   @Column({ nullable: true })
-  accessToken: string;
+  token: string;
+
+  @Column({ type: 'timestamp', nullable: true })
+  tokenExpires: Date;
 
   @CreateDateColumn()
   @AutoMap()

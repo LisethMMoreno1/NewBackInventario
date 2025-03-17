@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -11,6 +12,7 @@ import {
 } from 'typeorm';
 import { VehicleDeliveryRecord } from '../vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
 import { Order } from '../order/order.entity';
+import { VehicleOwner } from '../vehicleOwner/vehicleOwner.entity';
 
 @Entity('vehicle_reception_records')
 export class VehicleReceptionRecord {
@@ -58,15 +60,23 @@ export class VehicleReceptionRecord {
       nullable: true,
     },
   )
+  @AutoMap()
   @JoinColumn()
   deliveryRecord: VehicleDeliveryRecord;
 
   @OneToMany(() => Order, (order) => order.receptionRecord)
+  @AutoMap()
   orders: Order[]; // Relación con Order
 
   @CreateDateColumn()
+  @AutoMap()
   createdAt: Date;
 
   @UpdateDateColumn()
+  @AutoMap()
   updatedAt: Date;
+
+  @ManyToOne(() => VehicleOwner, (owner) => owner.receptionRecords)
+  @AutoMap()
+  vehicleOwner: VehicleOwner;
 }

@@ -61,7 +61,7 @@ export class CreateOrderService {
 
     // Obtener la última orden
     console.log('Buscando la última orden...');
-    const lastOrder = await this._orderRepository.getLastOrder();
+    const lastOrder = await this._orderRepository.getLastOrderNumber();
     console.log('Última orden encontrada:', lastOrder);
 
     // Generar número de orden

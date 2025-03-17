@@ -29,6 +29,9 @@ export class VehicleReceptionRecordResponseDto {
   advancePayment: number;
 
   @AutoMap()
+  vehicleOwnerId: number;
+
+  @AutoMap()
   createdAt: Date;
 
   @AutoMap()

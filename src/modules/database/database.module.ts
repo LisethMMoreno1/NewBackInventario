@@ -17,6 +17,7 @@ import { envs } from 'src/config/envs';
       synchronize: process.env.NODE_ENV === 'production' ? false : true,
     }),
   ],
+  exports: [TypeOrmModule],
 })
 @Global()
 export class DatabaseModule {}

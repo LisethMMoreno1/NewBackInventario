@@ -7,6 +7,7 @@ import { Payment } from 'src/modules/administration/domain/payment/payment.entit
 import { Tool } from 'src/modules/administration/domain/tool/tool.entity';
 import { User } from 'src/modules/administration/domain/user/user.entity';
 import { VehicleDeliveryRecord } from 'src/modules/administration/domain/vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
+import { VehicleOwner } from 'src/modules/administration/domain/vehicleOwner/vehicleOwner.entity';
 import { VehicleReceptionRecord } from 'src/modules/administration/domain/vehicleReceptionRecord/vehicleReceptionRecord.entity';
 import { AbstractRepository } from 'src/modules/database/classes/abstractRepository';
 import { GenericRepository } from 'src/modules/database/classes/genericRepository';
@@ -43,9 +44,15 @@ export class AdministrationContext {
   vehicleReceptionRecord: AbstractRepository<VehicleReceptionRecord>;
 
   /**
-   * Repository for the 'Tool' entity.
+   * Repository for the 'order' entity.
    */
   order: AbstractRepository<Order>;
+
+  /**
+   * Repository for the 'VehicleOwner' entity.
+   */
+  vehicleOwner: AbstractRepository<VehicleOwner>;
+
   /**
    * Creates an instance of AdministrationContextService.
    * @param dataSource - The data source to be injected.
@@ -60,6 +67,12 @@ export class AdministrationContext {
       this.dataSource,
       this.request,
     );
+    this.vehicleOwner = new GenericRepository<VehicleOwner>(
+      VehicleOwner,
+      this.dataSource,
+      this.request,
+    );
+
     this.tool = new GenericRepository<Tool>(
       Tool,
       this.dataSource,

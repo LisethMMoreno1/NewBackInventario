@@ -13,7 +13,18 @@ export class GetAllUserService {
 
   async handle(): Promise<User[]> {
     return await this._userRepository.getAll({
-      relations: ['role', 'tool'],
+      select: [
+        'id_user',
+        'identificationNumber',
+        'name',
+        'email',
+        'password',
+        'state',
+        'created_at',
+        'updated_at',
+        'role',
+      ],
+      relations: ['tool'],
     });
   }
 }

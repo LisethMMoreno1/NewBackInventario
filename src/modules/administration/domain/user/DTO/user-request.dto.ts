@@ -2,14 +2,18 @@ import { AutoMap } from '@automapper/classes';
 import {
   IsBoolean,
   IsEmail,
+  IsEnum,
+  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
   Length,
 } from 'class-validator';
+import { RolesEnum } from '../../role/roles.enum';
 
 export class UserRequestDto {
   @IsNotEmpty()
+  @IsInt()
   @AutoMap()
   identificationNumber: number;
 
@@ -30,11 +34,17 @@ export class UserRequestDto {
   @AutoMap()
   password: string;
 
-  // Se espera únicamente el código de la herramienta.
   @IsNotEmpty({ message: 'code_tool must not be empty' })
   @IsString()
   @AutoMap()
   code_tool: string;
+
+  @IsNotEmpty()
+  @IsEnum(RolesEnum, {
+    message: `El rol debe ser uno de los siguientes: ${Object.values(RolesEnum).join(', ')}`,
+  })
+  @AutoMap()
+  role: RolesEnum;
 
   @IsBoolean()
   @IsOptional()

@@ -101,7 +101,7 @@ export class OrderRepository {
     return this.getOne({ where: { id } });
   }
 
-  async getLastOrder(): Promise<Order | null> {
+  async getLastOrderNumber(): Promise<Order | null> {
     try {
       const lastOrder = await this._context.order.getOne({
         where: {}, // No hay condiciones específicas, solo queremos el último

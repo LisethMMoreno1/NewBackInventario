@@ -1,17 +1,13 @@
 export class OrderUtils {
-  static generateOrderNumber(lastOrderNumber?: string): string {
+  static generateOrderNumber(lastOrderNumber: string | null): string {
     if (!lastOrderNumber) {
-      return 'ORD-001';
+      return 'ORD-0001'; // Primera orden
     }
 
-    const match = lastOrderNumber.match(/ORD-(\d+)/);
-    if (!match) {
-      throw new Error('Invalid order number format');
-    }
+    const match = lastOrderNumber.match(/(\d+)$/); // Extrae solo los números
+    const lastNumber = match ? parseInt(match[0], 10) : 0;
+    const newNumber = (lastNumber + 1).toString().padStart(4, '0');
 
-    const nextOrderNumber = (parseInt(match[1], 10) + 1)
-      .toString()
-      .padStart(3, '0');
-    return `ORD-${nextOrderNumber}`;
+    return `ORD-${newNumber}`;
   }
 }
