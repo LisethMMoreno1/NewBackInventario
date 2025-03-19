@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { VehicleReceptionRecord } from '../vehicleReceptionRecord/vehicleReceptionRecord.entity';
 import { AutoMap } from '@automapper/classes';
 
@@ -57,6 +64,14 @@ export class VehicleOwner {
   authorizedForPickup: boolean;
 
   @OneToMany(() => VehicleReceptionRecord, (record) => record.vehicleOwner)
-  @AutoMap()
+  @AutoMap(() => VehicleReceptionRecord)
   receptionRecords: VehicleReceptionRecord[];
+
+  @CreateDateColumn()
+  @AutoMap()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  @AutoMap()
+  updatedAt: Date;
 }

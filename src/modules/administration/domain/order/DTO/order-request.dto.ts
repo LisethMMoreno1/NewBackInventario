@@ -17,10 +17,9 @@ export class OrderRequestDto {
   @AutoMap()
   workDetails?: string;
 
-  @IsOptional()
   @IsNumber()
   @AutoMap()
-  cost?: number;
+  cost: number;
 
   @IsOptional()
   @IsString()

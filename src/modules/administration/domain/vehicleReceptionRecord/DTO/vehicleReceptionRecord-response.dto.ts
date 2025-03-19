@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { VehicleOwner } from '../../vehicleOwner/vehicleOwner.entity';
 
 export class VehicleReceptionRecordResponseDto {
   @AutoMap()
@@ -29,7 +30,7 @@ export class VehicleReceptionRecordResponseDto {
   advancePayment: number;
 
   @AutoMap()
-  vehicleOwnerId: number;
+  vehicleOwner: VehicleOwner;
 
   @AutoMap()
   createdAt: Date;

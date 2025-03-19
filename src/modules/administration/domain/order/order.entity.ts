@@ -38,7 +38,7 @@ export class Order {
   @AutoMap()
   workDetails: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  @Column({ type: 'decimal' })
   @AutoMap()
   cost: number;
 }

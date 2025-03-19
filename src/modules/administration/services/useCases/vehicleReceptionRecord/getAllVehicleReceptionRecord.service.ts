@@ -14,12 +14,16 @@ export class GetAllVehicleReceptionRecordService {
 
   async handle(): Promise<VehicleReceptionRecordResponseDto[]> {
     console.log('Fetching all records...'); // Depuración
-    const records = await this._vehicleReceptionRecordRepository.getAll();
-    console.log('Records found:', records); // Depuración
+
+    const records = await this._vehicleReceptionRecordRepository.getAll({
+      relations: ['vehicleOwner'], // Agregado aquí directamente
+    });
+
+    console.log('Records found:', JSON.stringify(records, null, 2)); // Depuración detallada
 
     if (!records || records.length === 0) {
       console.log('No records found.'); // Depuración
-      return []; // Devuelve un array vacío si no hay registros
+      return [];
     }
 
     // Mapear cada registro a DTO
@@ -30,7 +34,8 @@ export class GetAllVehicleReceptionRecordService {
         VehicleReceptionRecordResponseDto,
       ),
     );
-    console.log('Mapped records:', mappedRecords); // Depuración
+
+    console.log('Mapped records:', JSON.stringify(mappedRecords, null, 2)); // Depuración
 
     return mappedRecords;
   }
