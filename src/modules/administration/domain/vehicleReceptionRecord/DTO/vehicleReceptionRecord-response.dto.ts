@@ -1,5 +1,6 @@
 import { AutoMap } from '@automapper/classes';
 import { VehicleOwner } from '../../vehicleOwner/vehicleOwner.entity';
+import { OrderResponseDto } from '../../order/DTO/order-response.dto';
 
 export class VehicleReceptionRecordResponseDto {
   @AutoMap()
@@ -31,6 +32,10 @@ export class VehicleReceptionRecordResponseDto {
 
   @AutoMap()
   vehicleOwner: VehicleOwner;
+
+  
+  @AutoMap(() => OrderResponseDto)
+  orders: OrderResponseDto[]; 
 
   @AutoMap()
   createdAt: Date;

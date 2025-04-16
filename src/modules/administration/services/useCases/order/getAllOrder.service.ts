@@ -4,9 +4,11 @@ import { OrderRepository } from 'src/modules/administration/infrastructure/persi
 
 @Injectable()
 export class GetAllOrdersService {
-  constructor(private readonly _orderRepository: OrderRepository) {}
+  constructor(private readonly _orderRepository: OrderRepository) { }
 
   async handle(): Promise<Order[]> {
-    return await this._orderRepository.getAll();
+    return await this._orderRepository.getAll({
+      relations: ['vehicleOwner'],
+    });
   }
 }

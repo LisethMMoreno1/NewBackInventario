@@ -6,7 +6,7 @@ import { Order } from 'src/modules/administration/domain/order/order.entity';
 import { Payment } from 'src/modules/administration/domain/payment/payment.entity';
 import { Tool } from 'src/modules/administration/domain/tool/tool.entity';
 import { User } from 'src/modules/administration/domain/user/user.entity';
-import { VehicleDeliveryRecord } from 'src/modules/administration/domain/vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
+import { VehicleExitRecord } from 'src/modules/administration/domain/vehicleExitRecord/vehicleExitRecord.entity';
 import { VehicleOwner } from 'src/modules/administration/domain/vehicleOwner/vehicleOwner.entity';
 import { VehicleReceptionRecord } from 'src/modules/administration/domain/vehicleReceptionRecord/vehicleReceptionRecord.entity';
 import { AbstractRepository } from 'src/modules/database/classes/abstractRepository';
@@ -33,10 +33,7 @@ export class AdministrationContext {
    */
   tool: AbstractRepository<Tool>;
 
-  /**
-   * Repository for the 'Tool' entity.
-   */
-  vehicleDeliveryRecord: AbstractRepository<VehicleDeliveryRecord>;
+
 
   /**
    * Repository for the 'Tool' entity.
@@ -52,6 +49,11 @@ export class AdministrationContext {
    * Repository for the 'VehicleOwner' entity.
    */
   vehicleOwner: AbstractRepository<VehicleOwner>;
+
+  /**
+ * Repository for the 'VehicleOwner' entity.
+ */
+  vehicleExitRecord: AbstractRepository<VehicleExitRecord>;
 
   /**
    * Creates an instance of AdministrationContextService.
@@ -89,14 +91,14 @@ export class AdministrationContext {
       this.dataSource,
       this.request,
     );
-
-    this.vehicleDeliveryRecord = new GenericRepository<VehicleDeliveryRecord>(
-      VehicleDeliveryRecord,
+    this.vehicleReceptionRecord = new GenericRepository<VehicleReceptionRecord>(
+      VehicleReceptionRecord,
       this.dataSource,
       this.request,
     );
-    this.vehicleReceptionRecord = new GenericRepository<VehicleReceptionRecord>(
-      VehicleReceptionRecord,
+
+    this.vehicleExitRecord = new GenericRepository<VehicleExitRecord>(
+      VehicleExitRecord,
       this.dataSource,
       this.request,
     );

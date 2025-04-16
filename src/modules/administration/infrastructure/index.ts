@@ -5,9 +5,9 @@ import { PaymentRepository } from './persistence/repositories/payment.repository
 import { OrderRepository } from './persistence/repositories/order.repository';
 import { ToolRepository } from './persistence/repositories/tool.repository';
 import { UserRepository } from './persistence/repositories/user.repository';
-import { VehicleDeliveryRecordRepository } from './persistence/repositories/vehicleDeliveryRecord.repository';
 import { VehicleReceptionRecordRepository } from './persistence/repositories/vehicleReceptionRecord.repository';
 import { VehicleOwnerRepository } from './persistence/repositories/vehicleOwner.repository';
+import { VehicleExitRecordRepository } from './persistence/repositories/vehicleExitRecord.repository';
 /**
  * An array of persistence providers for the administration module.
  */
@@ -17,8 +17,8 @@ export const AdministrationPersistenceProvider = [
   PaymentRepository,
   ToolRepository,
   VehicleReceptionRecordRepository,
-  VehicleDeliveryRecordRepository,
   OrderRepository,
   VehicleOwnerRepository,
+  VehicleExitRecordRepository,
   MaintenanceContext,
 ];

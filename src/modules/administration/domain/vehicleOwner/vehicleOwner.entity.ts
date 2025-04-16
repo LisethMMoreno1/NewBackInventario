@@ -2,12 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { VehicleReceptionRecord } from '../vehicleReceptionRecord/vehicleReceptionRecord.entity';
 import { AutoMap } from '@automapper/classes';
+import { Order } from '../order/order.entity';
+import { VehicleExitRecord } from '../vehicleExitRecord/vehicleExitRecord.entity';
 
 @Entity('vehicle_owners')
 export class VehicleOwner {
@@ -63,9 +66,17 @@ export class VehicleOwner {
   @AutoMap()
   authorizedForPickup: boolean;
 
+  @OneToMany(() => Order, order => order.vehicleOwner)
+  @AutoMap(() => Order)
+  orders: Order[];
+
   @OneToMany(() => VehicleReceptionRecord, (record) => record.vehicleOwner)
   @AutoMap(() => VehicleReceptionRecord)
   receptionRecords: VehicleReceptionRecord[];
+
+  @OneToMany(() => VehicleExitRecord, (exitRecord) => exitRecord.vehicleOwner)
+  @AutoMap(() => VehicleExitRecord)
+  exitRecords: VehicleExitRecord[]
 
   @CreateDateColumn()
   @AutoMap()

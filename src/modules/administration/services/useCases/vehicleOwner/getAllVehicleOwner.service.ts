@@ -10,10 +10,13 @@ export class GetAllVehicleOwnerService {
   constructor(
     private readonly _vehicleOwnerRepository: VehicleOwnerRepository,
     @InjectMapper() private readonly _mapper: Mapper,
-  ) {}
+  ) { }
 
   async handle(): Promise<VehicleOwnerResponseDto[]> {
-    const owners = await this._vehicleOwnerRepository.getAll();
+    const owners = await this._vehicleOwnerRepository.getAll({
+      relations: ['receptionRecords', 'orders'],
+    });
+
     return this._mapper.mapArray(owners, VehicleOwner, VehicleOwnerResponseDto);
   }
 }

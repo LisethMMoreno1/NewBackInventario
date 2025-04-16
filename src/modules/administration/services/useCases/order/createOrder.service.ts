@@ -5,7 +5,6 @@ import { OrderUtils } from 'src/common/utils/modules/orderUtils';
 import { OrderRequestDto } from 'src/modules/administration/domain/order/DTO/order-request.dto';
 import { Order } from 'src/modules/administration/domain/order/order.entity';
 import { OrderRepository } from 'src/modules/administration/infrastructure/persistence/repositories/order.repository';
-import { VehicleDeliveryRecordRepository } from 'src/modules/administration/infrastructure/persistence/repositories/vehicleDeliveryRecord.repository';
 import { VehicleReceptionRecordRepository } from 'src/modules/administration/infrastructure/persistence/repositories/vehicleReceptionRecord.repository';
 
 @Injectable()
@@ -14,7 +13,6 @@ export class CreateOrderService {
     @InjectMapper() private readonly _mapper: Mapper,
     private readonly _orderRepository: OrderRepository,
     private readonly _vehicleReceptionRecordRepository: VehicleReceptionRecordRepository,
-    private readonly _vehicleDeliveryRecordRepository: VehicleDeliveryRecordRepository,
   ) {}
 
   async handle(orderRequest: OrderRequestDto): Promise<Order> {
@@ -37,29 +35,10 @@ export class CreateOrderService {
       );
     }
 
-    // Buscar el registro de entrega (opcional)
-    let deliveryRecord = null;
-    if (orderRequest.deliveryRecordId) {
-      console.log(
-        'Buscando VehicleDeliveryRecord con ID:',
-        orderRequest.deliveryRecordId,
-      );
-      deliveryRecord = await this._vehicleDeliveryRecordRepository.getOne({
-        where: { id: orderRequest.deliveryRecordId },
-      });
-
-      if (!deliveryRecord) {
-        throw new NotFoundException(
-          `Registro de entrega con ID ${orderRequest.deliveryRecordId} no encontrado.`,
-        );
-      }
-      console.log('Registro de entrega encontrado:', deliveryRecord);
-    }
+   
 
     console.log('Reception Record ID:', orderRequest.receptionRecordId);
-    console.log('Delivery Record ID:', orderRequest.deliveryRecordId);
 
-    // Obtener la última orden
     console.log('Buscando la última orden...');
     const lastOrder = await this._orderRepository.getLastOrderNumber();
     console.log('Última orden encontrada:', lastOrder);
@@ -70,12 +49,11 @@ export class CreateOrderService {
     );
     console.log('Nuevo número de orden generado:', newOrderNumber);
 
-    // Mapear la solicitud a la entidad Order
+   
     const order = new Order();
-    order.orderNumber = newOrderNumber; // <-- Asigna el número de orden aquí
+    order.orderNumber = newOrderNumber; 
     order.receptionRecord = receptionRecord;
-    order.deliveryRecord = deliveryRecord || null;
-    order.status = 'ACTIVO';
+   order.status = 'ACTIVO';
     order.workDetails = orderRequest.workDetails;
     order.cost = orderRequest.cost;
 

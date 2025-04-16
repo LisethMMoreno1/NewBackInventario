@@ -8,11 +8,6 @@ export class OrderRequestDto {
   receptionRecordId: number;
 
   @IsOptional()
-  @IsNumber()
-  @AutoMap()
-  deliveryRecordId?: number;
-
-  @IsOptional()
   @IsString()
   @AutoMap()
   workDetails?: string;

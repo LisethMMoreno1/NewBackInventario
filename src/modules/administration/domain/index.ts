@@ -2,10 +2,9 @@
 
 import { Payment } from './payment/payment.entity';
 import { RolesEnum } from './role/roles.enum';
-
 import { Tool } from './tool/tool.entity';
 import { User } from './user/user.entity';
-import { VehicleDeliveryRecord } from './vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
+import { VehicleExitRecord } from './vehicleExitRecord/vehicleExitRecord.entity';
 import { VehicleReceptionRecord } from './vehicleReceptionRecord/vehicleReceptionRecord.entity';
 
 export const administrationEntities = [
@@ -14,6 +13,6 @@ export const administrationEntities = [
   Option,
   Tool,
   VehicleReceptionRecord,
-  VehicleDeliveryRecord,
   RolesEnum,
+  VehicleExitRecord
 ];

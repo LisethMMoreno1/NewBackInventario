@@ -1,5 +1,7 @@
 import { AutoMap } from '@automapper/classes';
 import { VehicleReceptionRecordResponseDto } from '../../VehicleReceptionRecord/DTO/VehicleReceptionRecord-response.dto';
+import { Order } from '../../order/order.entity';
+import { VehicleExitRecordResponseDto } from '../../vehicleExitRecord/DTO/vehicleExitRecord-response.dto';
 
 export class VehicleOwnerResponseDto {
   @AutoMap()
@@ -41,6 +43,13 @@ export class VehicleOwnerResponseDto {
   @AutoMap()
   authorizedForPickup: boolean;
 
+
+  @AutoMap(() => [Order])
+  orders: Order[];
+
   @AutoMap(() => [VehicleReceptionRecordResponseDto])
   receptionRecords: VehicleReceptionRecordResponseDto[];
+
+  @AutoMap(() => VehicleExitRecordResponseDto)
+  exitRecords: VehicleExitRecordResponseDto[];  // Relación de salida de vehículos
 }

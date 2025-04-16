@@ -10,7 +10,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { VehicleDeliveryRecord } from '../vehicleDeliveryRecord/vehicleDeliveryRecord.entity';
 import { Order } from '../order/order.entity';
 import { VehicleOwner } from '../vehicleOwner/vehicleOwner.entity';
 
@@ -52,21 +51,9 @@ export class VehicleReceptionRecord {
   @AutoMap()
   advancePayment: number;
 
-  @OneToOne(
-    () => VehicleDeliveryRecord,
-    (delivery) => delivery.receptionRecord,
-    {
-      cascade: true,
-      nullable: true,
-    },
-  )
-  @AutoMap()
-  @JoinColumn()
-  deliveryRecord: VehicleDeliveryRecord;
-
   @OneToMany(() => Order, (order) => order.receptionRecord)
   @AutoMap()
-  orders: Order[]; // Relación con Order
+  orders: Order[];
 
   @CreateDateColumn()
   @AutoMap()

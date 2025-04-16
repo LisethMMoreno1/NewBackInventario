@@ -3,6 +3,7 @@ import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
 import { VehicleOwnerRequestDto } from 'src/modules/administration/domain/vehicleOwner/DTO/vehicleOwner-request.dto';
 import { VehicleOwnerResponseDto } from 'src/modules/administration/domain/vehicleOwner/DTO/vehicleOwner-response.dto';
+import { VehicleOwnerIResponseDto } from 'src/modules/administration/domain/vehicleOwner/DTO/vehicleOwnerI-response.dto';
 import { VehicleOwner } from 'src/modules/administration/domain/vehicleOwner/vehicleOwner.entity';
 
 @Injectable()
@@ -15,6 +16,8 @@ export class VehicleOwnerProfile extends AutomapperProfile {
     return (mapper: Mapper) => {
       createMap(mapper, VehicleOwnerRequestDto, VehicleOwner);
       createMap(mapper, VehicleOwner, VehicleOwnerResponseDto);
+      createMap(mapper, VehicleOwnerIResponseDto, VehicleOwnerResponseDto);
+
     };
   }
 }
